@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Общие сведения об этой сборке предоставляются следующим набором
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанные со сборкой.
-[assembly: AssemblyTitle("ComparisonOfModelsLibrary")]
+[assembly: AssemblyTitle("SavingData")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ComparisonOfModelsLibrary")]
+[assembly: AssemblyProduct("SavingData")]
 [assembly: AssemblyCopyright("Copyright ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("e959e841-c2e7-440e-a928-94721505ea08")]
+[assembly: Guid("6b1c2071-6c1c-49ec-bada-73b4754227f6")]
 
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //

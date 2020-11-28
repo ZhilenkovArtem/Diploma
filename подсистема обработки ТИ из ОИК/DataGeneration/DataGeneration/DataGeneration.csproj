@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BEFE3AF7-3FCD-4A22-A89A-0DFBCEE05652}</ProjectGuid>
+    <ProjectGuid>{96A59108-0F41-46C9-B0BD-C07310DC18B8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>ComparisonOfModels</RootNamespace>
-    <AssemblyName>ComparisonOfModels</AssemblyName>
+    <RootNamespace>DataGeneration</RootNamespace>
+    <AssemblyName>DataGeneration</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -48,6 +48,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GettingDataFromRastrWin3Library\GettingDataFromRastrWin3Library.csproj">
+      <Project>{c526fc94-d14d-498c-9b4f-8fac8f841e91}</Project>
+      <Name>GettingDataFromRastrWin3Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SavingData\SavingData.csproj">
+      <Project>{6b1c2071-6c1c-49ec-bada-73b4754227f6}</Project>
+      <Name>SavingData</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
