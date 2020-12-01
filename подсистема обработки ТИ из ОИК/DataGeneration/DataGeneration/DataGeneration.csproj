@@ -54,9 +54,9 @@
       <Project>{c526fc94-d14d-498c-9b4f-8fac8f841e91}</Project>
       <Name>GettingDataFromRastrWin3Library</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SavingData\SavingData.csproj">
-      <Project>{6b1c2071-6c1c-49ec-bada-73b4754227f6}</Project>
-      <Name>SavingData</Name>
+    <ProjectReference Include="..\TransformationRastrData\TransformationRastrData.csproj">
+      <Project>{bf8bf29f-9890-4ac7-a6bb-822aaf578367}</Project>
+      <Name>TransformationRastrData</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

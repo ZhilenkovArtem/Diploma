@@ -14,7 +14,7 @@ namespace GettingDataFromRastrWin3Library
 
         public Node LastNode { get; set; }
 
-        public double NominalVoltage { get; set; }
+        public double ControlParametrCoefficient { get; set; }
 
         public double ActivePowerAtFirst { get; set; }
 
@@ -28,22 +28,25 @@ namespace GettingDataFromRastrWin3Library
 
         public double CurrentInTheEnd { get; set; }
 
+        public double DistrictCoefficient { get; set; }
+
         public LineSegment(int state, Node firstNode, Node lastNode, 
-            double nominalVoltage, double activePowerAtFirst, 
+            double controlParametrCoefficient, double activePowerAtFirst, 
             double activePowerInTheEnd, double reactivePowerAtFirst, 
             double reactivePowerInTheEnd, double currentAtFirst, 
-            double currentInTheEnd)
+            double currentInTheEnd, double districtCoefficient)
         {
             this.State = state;
             this.FirstNode = firstNode;
             this.LastNode = lastNode;
-            this.NominalVoltage = nominalVoltage;
+            this.ControlParametrCoefficient = controlParametrCoefficient;
             this.ActivePowerAtFirst = activePowerAtFirst;
             this.ActivePowerInTheEnd = activePowerInTheEnd;
             this.ReactivePowerAtFirst = reactivePowerAtFirst;
             this.ReactivePowerInTheEnd = reactivePowerInTheEnd;
             this.CurrentAtFirst = currentAtFirst;
             this.CurrentInTheEnd = currentInTheEnd;
+            this.DistrictCoefficient = districtCoefficient;
         }
 
         public string[] GetNamesOfProperties()

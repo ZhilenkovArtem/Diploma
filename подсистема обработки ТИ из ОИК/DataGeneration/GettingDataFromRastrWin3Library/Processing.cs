@@ -37,15 +37,13 @@ namespace GettingDataFromRastrWin3Library
             col calculatedVoltage = (col)nodesTable.Cols.Item("vras");
             col activeLoad = (col)nodesTable.Cols.Item("pn");
             col reactiveLoad = (col)nodesTable.Cols.Item("qn");
-            col district = (col)nodesTable.Cols.Item("na");
+            col district = (col)nodesTable.Cols.Item("npa");
 
             HashSet<Node> nodes = new HashSet<Node>();
 
             for (int i = 0; i < rowsCount; i++)
             {
-                if (district.Z[i] == 64 ||
-                    district.Z[i] == 65 ||
-                    district.Z[i] == 74)
+                if (_districtNumbers.Contains(district.Z[i]))
                 {
                     nodes.Add(new Node((state.Z[i] == true) ? 1 : 0, number.Z[i], 
                         nominalVoltage.Z[i], calculatedVoltage.Z[i], 
@@ -88,23 +86,28 @@ namespace GettingDataFromRastrWin3Library
                 {
                     if (type.Z[i] == 0)
                     {
-                        lineSegments.Add(new LineSegment(state.Z[i], 
-                            firestNode, lastNode, firestNode.NominalVoltage, 
+                        lineSegments.Add(new LineSegment((state.Z[i] == 0) ? 0 : 1, 
+                            firestNode, lastNode, firestNode.ControlParametrCoefficient, 
                             activePowerAtFirst.Z[i], activePowerInTheEnd.Z[i], 
                             reactivePowerAtFirst.Z[i], reactivePowerInTheEnd.Z[i], 
-                            currentAtFirst.Z[i], currentInTheEnd.Z[i]));
+                            currentAtFirst.Z[i], currentInTheEnd.Z[i],
+                            ConditionMore(firestNode.ControlParametrCoefficient, lastNode.ControlParametrCoefficient)));
                     }
                     else if (type.Z[i] == 1)
                     {
-                        transformers.Add(new Transformer(state.Z[i], firestNode, lastNode, 
-                            ConditionLess(firestNode.NominalVoltage, lastNode.NominalVoltage),
+                        transformers.Add(new Transformer((state.Z[i] == 0) ? 0 : 1, 
+                            firestNode, lastNode, 
+                            ConditionLess(firestNode.ControlParametrCoefficient, lastNode.ControlParametrCoefficient),
                             ConditionMore(activePowerAtFirst.Z[i], activePowerInTheEnd.Z[i]),
                             ConditionMore(reactivePowerAtFirst.Z[i], reactivePowerInTheEnd.Z[i]),
-                            currentMax.Z[i]));
+                            currentMax.Z[i],
+                            ConditionMore(firestNode.ControlParametrCoefficient, lastNode.ControlParametrCoefficient)));
                     }
                     else
                     {
-                        switches.Add(new Switch(state.Z[i], firestNode, lastNode, firestNode.NominalVoltage));
+                        switches.Add(new Switch((state.Z[i] == 0) ? 0 : 1, 
+                            firestNode, lastNode, firestNode.ControlParametrCoefficient,
+                            ConditionMore(firestNode.ControlParametrCoefficient, lastNode.ControlParametrCoefficient)));
                     }
                 }
             }
@@ -142,7 +145,9 @@ namespace GettingDataFromRastrWin3Library
 
                 if (nodes.Contains(connectionNode))
                 {
-                    generators.Add(new Generator((state.Z[i] == true) ? 1 : 0, connectionNode, activePower.Z[i], reactivePower.Z[i], nominalActivePower.Z[i]));
+                    generators.Add(new Generator((state.Z[i] == true) ? 1 : 0, 
+                        connectionNode, activePower.Z[i], reactivePower.Z[i], 
+                        nominalActivePower.Z[i], connectionNode.DistrictCoefficient));
                 }
             }
 
@@ -157,5 +162,34 @@ namespace GettingDataFromRastrWin3Library
         {
             _rastr.Load(RG_KOD.RG_REPL, path, null);
         }
+
+        private static List<int> _districtNumbers = new List<int>()
+        {
+            60208,
+            60401,
+            60402,
+            60403,
+            60404,
+            60405,
+            60504,
+            60511,
+            60512,
+            60513,
+            60515,
+            60516,
+            60517,
+            60521,
+            60522,
+            60523,
+            60524,
+            60525,
+            60526,
+            60527,
+            60528,
+            60531,
+            60533,
+            60534,
+            70400
+        };
     }
 }

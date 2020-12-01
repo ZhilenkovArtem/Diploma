@@ -14,7 +14,7 @@ namespace GettingDataFromRastrWin3Library
 
         public Node LastNode { get; set; }
 
-        public double NominalVoltage { get; set; }
+        public double ControlParametrCoefficient { get; set; }
 
         public double ActivePower { get; set; }
 
@@ -22,17 +22,20 @@ namespace GettingDataFromRastrWin3Library
 
         public double Current { get; set; }
 
+        public double DistrictCoefficient { get; set; }
+
         public Transformer(int state, Node firstNode, Node lastNode, 
-            double nominalVoltage, double activePower, double reactivePower, 
-            double current)
+            double controlParametrCoefficient, double activePower, double reactivePower, 
+            double current, double districtCoefficient)
         {
             this.State = state;
             this.FirstNode = firstNode;
             this.LastNode = lastNode;
-            this.NominalVoltage = nominalVoltage;
+            this.ControlParametrCoefficient = controlParametrCoefficient;
             this.ActivePower = activePower;
             this.ReactivePower = reactivePower;
             this.Current = current;
+            this.DistrictCoefficient = districtCoefficient;
         }
 
         public string[] GetNamesOfProperties()

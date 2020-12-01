@@ -16,16 +16,20 @@ namespace GettingDataFromRastrWin3Library
 
         public double ReactivePower { get; set; }
 
-        public double NominalActivePower { get; set; }
+        public double ControlParametrCoefficient { get; set; }
+
+        public double DistrictCoefficient { get; set; }
 
         public Generator(int state, Node connectionNode, double activePower, 
-            double reactivePower, double nominalActivePower)
+            double reactivePower, double nominalActivePower, 
+            double districtCoefficient)
         {
             this.State = state;
             this.ConnectionNode = connectionNode;
             this.ActivePower = activePower;
             this.ReactivePower = reactivePower;
-            this.NominalActivePower = nominalActivePower;
+            this.ControlParametrCoefficient = nominalActivePower / 250;
+            this.DistrictCoefficient = districtCoefficient;
         }
 
         public string[] GetNamesOfProperties()

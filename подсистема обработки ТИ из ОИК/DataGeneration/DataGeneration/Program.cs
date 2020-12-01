@@ -1,19 +1,35 @@
 ﻿using System;
+using System.IO;
 
 namespace DataGeneration
 {
     class Program
     {
+        private const string INPUTPATH = @"C:\Users\Artem\Desktop\rg2\Folder";
+        private const string OUTPUTPATH1 = @"C:\Users\Artem\Desktop\rg2\Output\DataDB\";
+        private const string OUTPUTPATH2 = @"C:\Users\Artem\Desktop\rg2\Output\Telemetries\";
+
         static void Main()
         {
-            string path = @"C:\Users\Artem\Desktop\rg2\BrKr_ONBr4_1975 с Палычем.rg2";
-            var dataFromRastrWin = GettingDataFromRastrWin3Library.Processing.GetDataFromRastrWin3(path);
+            Console.WriteLine("Поехали!");
 
-            var pathForDataSet = @"C:\Users\Artem\Desktop\dataSet.dat";
-            var pathForTelemetries = @"C:\Users\Artem\Desktop\telemetries.dat";
-            SavingData.Processing.DataOutput(dataFromRastrWin, pathForDataSet, pathForTelemetries);
+            var number = 1;
 
-            Console.WriteLine("Файлы созданы");
+            DirectoryInfo directory = new DirectoryInfo(INPUTPATH);
+            foreach (var item in directory.GetFiles())
+            {
+                var dataFromRastrWin = GettingDataFromRastrWin3Library.
+                    Processing.GetDataFromRastrWin3(item.FullName);
+
+                var pathForDataSet = $"{OUTPUTPATH1}dataSet{number}.dat";
+                var pathForTelemetries = $"{OUTPUTPATH2}telemetries{number}.dat";
+                TransformationRastrData.Processing.DataOutput(dataFromRastrWin, pathForDataSet, pathForTelemetries);
+
+                Console.WriteLine($"С {item.Name} закончили");
+                number++;
+            }
+
+            Console.WriteLine("Выпонение программы завершено");
             Console.ReadKey();
         }
     }

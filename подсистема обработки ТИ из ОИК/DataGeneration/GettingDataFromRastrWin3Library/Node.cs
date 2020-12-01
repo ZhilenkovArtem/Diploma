@@ -12,7 +12,7 @@ namespace GettingDataFromRastrWin3Library
 
         public int Number { get; set; }
 
-        public double NominalVoltage { get; set; }
+        public double ControlParametrCoefficient { get; set; }
 
         public double CalculatedVoltage { get; set; }
 
@@ -20,18 +20,18 @@ namespace GettingDataFromRastrWin3Library
 
         public double ReactiveLoad { get; set; }
 
-        public int District { get; set; }
+        public double DistrictCoefficient { get; set; }
 
         public Node(int state, int number, double nominalVoltage,
             double calculatedVoltage, double activeLoad, double reactiveLoad, int district)
         {
             this.State = state;
             this.Number = number;
-            this.NominalVoltage = nominalVoltage;
+            this.ControlParametrCoefficient = GetVoltageCoefficient(nominalVoltage);
             this.CalculatedVoltage = calculatedVoltage;
             this.ActiveLoad = activeLoad;
             this.ReactiveLoad = reactiveLoad;
-            this.District = district;
+            this.DistrictCoefficient = districtCoefficients[district];
         }
 
         public string[] GetNamesOfProperties()
@@ -44,5 +44,46 @@ namespace GettingDataFromRastrWin3Library
                 "ReactiveLoad"
             };
         }
+
+        private double GetVoltageCoefficient(double nominalVoltage)
+        {
+            if (nominalVoltage == 110)
+            {
+                return 1;
+            }
+            else
+            {
+                return nominalVoltage * 3 / 500;
+            }
+        }
+        
+        private Dictionary<int, double> districtCoefficients = new Dictionary<int, double>()
+        {
+            {60208, 0.5},
+            {60401, 1},
+            {60402, 1},
+            {60403, 0.5},
+            {60404, 0.75},
+            {60405, 0.5},
+            {60504, 0.5},
+            {60511, 0.75},
+            {60512, 1},
+            {60513, 0.5},
+            {60515, 1},
+            {60516, 1},
+            {60517, 0.5},
+            {60521, 0.5},
+            {60522, 0.5},
+            {60523, 0.5},
+            {60524, 0.5},
+            {60525, 1},
+            {60526, 1},
+            {60527, 0.5},
+            {60528, 0.5},
+            {60531, 0.75},
+            {60533, 1},
+            {60534, 1},
+            {70400, 0.5}
+        };
     }
 }
