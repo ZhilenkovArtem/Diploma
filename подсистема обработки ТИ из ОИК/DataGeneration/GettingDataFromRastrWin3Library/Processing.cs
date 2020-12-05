@@ -7,10 +7,21 @@ using ASTRALib;
 
 namespace GettingDataFromRastrWin3Library
 {
+    /// <summary>
+    /// Класс, описывающий сбор расчетных данных из RastrWin3
+    /// </summary>
     public class Processing
     {
+        /// <summary>
+        /// Объект Растра
+        /// </summary>
         static Rastr _rastr = new Rastr();
 
+        /// <summary>
+        /// Получить данные из Растра
+        /// </summary>
+        /// <param name="path">Путь файлу режима</param>
+        /// <returns>Полученные данные</returns>
         public static AllData GetDataFromRastrWin3(string path)
         {
             LoadFiles(path);
@@ -26,6 +37,10 @@ namespace GettingDataFromRastrWin3Library
             return new AllData(nodes, edges, generators);
         }
 
+        /// <summary>
+        /// Получить хэш узлов
+        /// </summary>
+        /// <returns>хэш узлов</returns>
         private static HashSet<Node> GetHashOfNodes()
         {
             table nodesTable = (table)_rastr.Tables.Item("node");
@@ -54,6 +69,11 @@ namespace GettingDataFromRastrWin3Library
             return nodes;
         }
 
+        /// <summary>
+        /// Получить хэш ветвей (ребер / электросетевых элементов)
+        /// </summary>
+        /// <param name="nodes">Хэш узлов</param>
+        /// <returns>Ветви</returns>
         private static Edges GetEdges(HashSet<Node> nodes)
         {
             table vetv = (table)_rastr.Tables.Item("vetv");
@@ -115,16 +135,33 @@ namespace GettingDataFromRastrWin3Library
             return new Edges(lineSegments, transformers, switches);
         }
 
+        /// <summary>
+        /// Выбрать большее из двух чисел
+        /// </summary>
+        /// <param name="item1">Первое число</param>
+        /// <param name="item2">Второе число</param>
+        /// <returns>Большее число</returns>
         private static double ConditionMore(double item1, double item2)
         {
             return (item1 >= item2) ? item1 : item2;
         }
 
+        /// <summary>
+        /// Выбрать меньшее из двух чисел
+        /// </summary>
+        /// <param name="item1">Первое число</param>
+        /// <param name="item2">Второе число</param>
+        /// <returns>Меньшее число</returns>
         private static double ConditionLess(double item1, double item2)
         {
             return (item1 <= item2) ? item1 : item2;
         }
 
+        /// <summary>
+        /// Получить хэш генераторов
+        /// </summary>
+        /// <param name="nodes">Хэш узлов</param>
+        /// <returns>Хэш генераторов</returns>
         private static HashSet<Generator> GetHashOfGenerators(HashSet<Node> nodes)
         {
             table generatorsTable = (table)_rastr.Tables.Item("Generator");
@@ -163,6 +200,9 @@ namespace GettingDataFromRastrWin3Library
             _rastr.Load(RG_KOD.RG_REPL, path, null);
         }
 
+        /// <summary>
+        /// Номера необходимых районов
+        /// </summary>
         private static List<int> _districtNumbers = new List<int>()
         {
             60208,

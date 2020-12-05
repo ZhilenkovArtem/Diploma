@@ -9,12 +9,25 @@ using UsingOfPayload;
 
 namespace DataComparison
 {
+    /// <summary>
+    /// Класс, описывающий процесс сравнения режима из ОИК и расчетных режимов
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Путь к файлам с расчетными данными
+        /// </summary>
         private const string PATH = @"C:\Users\Artem\Desktop\rg2\Output\DataDB\";
+
+        /// <summary>
+        /// Путь к файлу с телеметрией
+        /// </summary>
         private const string TELEMETRIESPATH = @"C:\Users\Artem\Desktop\rg2\Output\Telemetries\telemetries24.dat";
 
-        static void Main(string[] args)
+        /// <summary>
+        /// Точка входа
+        /// </summary>
+        static void Main()
         {
             var pathForTelemetries = TELEMETRIESPATH;
             var telemetries = Telemetry.LoadList(pathForTelemetries);
@@ -28,6 +41,8 @@ namespace DataComparison
                 double telesignalsQuantity = 0;
                 double telemetriesSum = 0;
                 double telemetriesQuantity = 0;
+                // Для ТС просто определялось соответствие включенного 
+                // состояния, а для ТИ - относительное отклонение
                 foreach (var telemetry in telemetries)
                 {
                     var data = dataSet.Where(d => d.ID == telemetry.Address).FirstOrDefault();
@@ -58,6 +73,12 @@ namespace DataComparison
             Console.ReadKey();
         }
 
+        /// <summary>
+        /// Получить корректное значение формата { С = (А+В) / Мах(А;В) }
+        /// </summary>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <returns></returns>
         private static double GetValue(double value1, double value2)
         {
             if (value1 == 0 && value2 == 0)

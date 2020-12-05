@@ -6,22 +6,56 @@ using System.Threading.Tasks;
 
 namespace GettingDataFromRastrWin3Library
 {
+    /// <summary>
+    /// Узел (вершина)
+    /// </summary>
     public class Node
     {
+        /// <summary>
+        /// Состояние (вкл/откл)
+        /// </summary>
         public int State { get; set; }
 
+        /// <summary>
+        /// Номер узла в таблице узлов в RastrWin3
+        /// </summary>
         public int Number { get; set; }
 
+        /// <summary>
+        /// Коэффициент контрольного параметра
+        /// </summary>
         public double ControlParametrCoefficient { get; set; }
 
+        /// <summary>
+        /// Расчетное напряжение
+        /// </summary>
         public double CalculatedVoltage { get; set; }
 
+        /// <summary>
+        /// Активная мощность нагрузки в узле
+        /// </summary>
         public double ActiveLoad { get; set; }
 
+        /// <summary>
+        /// Реактивная мощность нагрузки в узле
+        /// </summary>
         public double ReactiveLoad { get; set; }
 
+        /// <summary>
+        /// Коэффициент района
+        /// </summary>
         public double DistrictCoefficient { get; set; }
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
+        /// <param name="state"></param>
+        /// <param name="number"></param>
+        /// <param name="nominalVoltage"></param>
+        /// <param name="calculatedVoltage"></param>
+        /// <param name="activeLoad"></param>
+        /// <param name="reactiveLoad"></param>
+        /// <param name="district"></param>
         public Node(int state, int number, double nominalVoltage,
             double calculatedVoltage, double activeLoad, double reactiveLoad, int district)
         {
@@ -34,6 +68,10 @@ namespace GettingDataFromRastrWin3Library
             this.DistrictCoefficient = districtCoefficients[district];
         }
 
+        /// <summary>
+        /// Получить имена всех свойств класса
+        /// </summary>
+        /// <returns>Массив имен свойств класса</returns>
         public string[] GetNamesOfProperties()
         {
             return new string[]
@@ -45,6 +83,11 @@ namespace GettingDataFromRastrWin3Library
             };
         }
 
+        /// <summary>
+        /// Получить коэффициент по напряжению (по контрольному параметру)
+        /// </summary>
+        /// <param name="nominalVoltage">Номинальное напряжение</param>
+        /// <returns>Коэффициент по напряжению</returns>
         private double GetVoltageCoefficient(double nominalVoltage)
         {
             if (nominalVoltage == 110)
@@ -57,6 +100,9 @@ namespace GettingDataFromRastrWin3Library
             }
         }
         
+        /// <summary>
+        /// Номер района и соответствующий ему районный коэффициент
+        /// </summary>
         private Dictionary<int, double> districtCoefficients = new Dictionary<int, double>()
         {
             {60208, 0.5},
