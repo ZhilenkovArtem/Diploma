@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DefinitionGroupsCoherentGenerators", "DefinitionGroupsCoherentGenerators\DefinitionGroupsCoherentGenerators.csproj", "{0E27F889-7DEF-4B6C-B3FB-1FEEDA289727}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SynchronizedVectorMeasurementProcessing", "DefinitionGroupsCoherentGenerators\SynchronizedVectorMeasurementProcessing.csproj", "{0E27F889-7DEF-4B6C-B3FB-1FEEDA289727}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{C7368CB3-42A3-4636-95F2-141AE2343E3F}"
 EndProject

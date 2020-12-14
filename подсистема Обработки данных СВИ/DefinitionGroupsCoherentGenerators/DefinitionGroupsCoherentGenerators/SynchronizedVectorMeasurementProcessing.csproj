@@ -41,8 +41,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Errors.cs" />
-    <Compile Include="GeneratorsData.cs" />
+    <Compile Include="Complex.cs" />
+    <Compile Include="ConfigDeviationsInWithin60ms.cs" />
+    <Compile Include="ConfigurationFrame.cs" />
+    <Compile Include="DetectionOfFault.cs" />
+    <Compile Include="FindingGroupsCoherentGenerators.cs" />
+    <Compile Include="DeviationsList.cs" />
+    <Compile Include="PMU.cs" />
+    <Compile Include="PMUsDeviation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

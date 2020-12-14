@@ -29,6 +29,7 @@
 #include <getopt.h>
 #endif
 
+#include "rdkafka/kafkaproducer.h"
 #include <librdkafka/rdkafkacpp.h>
 // #include "rdkafkacpp.h"
 

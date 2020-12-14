@@ -57,15 +57,16 @@
   <ItemGroup>
     <Compile Include="Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DefinitionGroupsCoherentGenerators\DefinitionGroupsCoherentGenerators.csproj">
+    <ProjectReference Include="..\DefinitionGroupsCoherentGenerators\SynchronizedVectorMeasurementProcessing.csproj">
       <Project>{0e27f889-7def-4b6c-b3fb-1feeda289727}</Project>
-      <Name>DefinitionGroupsCoherentGenerators</Name>
+      <Name>SynchronizedVectorMeasurementProcessing</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
