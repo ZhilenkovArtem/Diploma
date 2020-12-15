@@ -11,65 +11,65 @@ namespace Testing
         /// Получить список с тестовыми данными по неустойчивому режиму
         /// </summary>
         /// <returns>Список с тестовыми данными</returns>
-        public static List<List<NodesParametrs>> GetTestData()
+        public static List<List<NodesParameters>> GetTestData()
         {
-            return new List<List<NodesParametrs>>()
+            return new List<List<NodesParameters>>()
             {
-                new List<NodesParametrs>()
+                new List<NodesParameters>()
                 {
-                    new NodesParametrs(507.65, 11.72),
-                    new NodesParametrs(507.65, 11.72),
-                    new NodesParametrs(507.65, 11.72),
-                    new NodesParametrs(507.65, 11.72),
-                    new NodesParametrs(507.65, 11.72),
-                    new NodesParametrs(507.65, 11.72),
-                    new NodesParametrs(510.40, 26.18),
-                    new NodesParametrs(509.91, 26.10),
-                    new NodesParametrs(509.91, 26.10),
-                    new NodesParametrs(509.91, 26.10),
-                    new NodesParametrs(509.91, 26.10)
+                    new NodesParameters(507.65, 11.72),
+                    new NodesParameters(507.65, 11.72),
+                    new NodesParameters(507.65, 11.72),
+                    new NodesParameters(507.65, 11.72),
+                    new NodesParameters(507.65, 11.72),
+                    new NodesParameters(507.65, 11.72),
+                    new NodesParameters(510.40, 26.18),
+                    new NodesParameters(509.91, 26.10),
+                    new NodesParameters(509.91, 26.10),
+                    new NodesParameters(509.91, 26.10),
+                    new NodesParameters(509.91, 26.10)
                 },
-                new List<NodesParametrs>()
+                new List<NodesParameters>()
                 {
-                    new NodesParametrs(428.69, 10.44),
-                    new NodesParametrs(428.69, 10.44),
-                    new NodesParametrs(428.69, 10.44),
-                    new NodesParametrs(428.69, 10.44),
-                    new NodesParametrs(428.69, 10.44),
-                    new NodesParametrs(428.69, 10.44),
-                    new NodesParametrs(330.40, 29.10),
-                    new NodesParametrs(323.99, 29.06),
-                    new NodesParametrs(323.99, 29.06),
-                    new NodesParametrs(323.99, 29.06),
-                    new NodesParametrs(323.99, 29.06)
+                    new NodesParameters(428.69, 10.44),
+                    new NodesParameters(428.69, 10.44),
+                    new NodesParameters(428.69, 10.44),
+                    new NodesParameters(428.69, 10.44),
+                    new NodesParameters(428.69, 10.44),
+                    new NodesParameters(428.69, 10.44),
+                    new NodesParameters(330.40, 29.10),
+                    new NodesParameters(323.99, 29.06),
+                    new NodesParameters(323.99, 29.06),
+                    new NodesParameters(323.99, 29.06),
+                    new NodesParameters(323.99, 29.06)
                 },
-                new List<NodesParametrs>()
+                new List<NodesParameters>()
                 {
-                    new NodesParametrs(427.55, 10.57),
-                    new NodesParametrs(427.55, 10.57),
-                    new NodesParametrs(427.55, 10.57),
-                    new NodesParametrs(427.55, 10.57),
-                    new NodesParametrs(427.55, 10.57),
-                    new NodesParametrs(427.55, 10.57),
-                    new NodesParametrs(329.05, 29.53),
-                    new NodesParametrs(322.68, 29.48),
-                    new NodesParametrs(322.68, 29.48),
-                    new NodesParametrs(322.68, 29.48),
-                    new NodesParametrs(322.68, 29.48)
+                    new NodesParameters(427.55, 10.57),
+                    new NodesParameters(427.55, 10.57),
+                    new NodesParameters(427.55, 10.57),
+                    new NodesParameters(427.55, 10.57),
+                    new NodesParameters(427.55, 10.57),
+                    new NodesParameters(427.55, 10.57),
+                    new NodesParameters(329.05, 29.53),
+                    new NodesParameters(322.68, 29.48),
+                    new NodesParameters(322.68, 29.48),
+                    new NodesParameters(322.68, 29.48),
+                    new NodesParameters(322.68, 29.48)
                 },
-                new List<NodesParametrs>()
+                new List<NodesParameters>()
                 {
-                    new NodesParametrs(450.23, 7.54),
-                    new NodesParametrs(450.23, 7.54),
-                    new NodesParametrs(450.23, 7.54),
-                    new NodesParametrs(450.23, 7.54),
-                    new NodesParametrs(450.23, 7.54),
-                    new NodesParametrs(450.23, 7.54),
-                    new NodesParametrs(314.86, 34.75),
-                    new NodesParametrs(307.67, 35.20),
-                    new NodesParametrs(307.67, 35.20),
-                    new NodesParametrs(307.67, 35.20),
-                    new NodesParametrs(307.67, 35.20)
+                    new NodesParameters(450.23, 7.54),
+                    new NodesParameters(450.23, 7.54),
+                    new NodesParameters(450.23, 7.54),
+                    new NodesParameters(450.23, 7.54),
+                    new NodesParameters(450.23, 7.54),
+                    new NodesParameters(450.23, 7.54),
+                    new NodesParameters(314.86, 34.75),
+                    new NodesParameters(307.67, 35.20),
+                    new NodesParameters(307.67, 35.20),
+                    new NodesParameters(307.67, 35.20),
+                    new NodesParameters(307.67, 35.20)
                 }
             };
         }

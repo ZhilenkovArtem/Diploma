@@ -45,7 +45,7 @@ namespace SynchronizedVectorMeasurementProcessing
             float denominator = 0;
             foreach (var pmu in data)
             {
-                var values = Complex.ConvertToTrigonometric(pmu.Voltage);
+                var values = Converting.ConvertComplexToTrigonometric(pmu.Voltage);
                 var angle = values[1];
                 var power = pmu.Power;
                 numerator += power * angle;
@@ -65,7 +65,7 @@ namespace SynchronizedVectorMeasurementProcessing
             var devList = new List<PMUsDeviation>();
             foreach (var pmu in data)
             {
-                var angle = Complex.ConvertToTrigonometric(pmu.Voltage)[1];
+                var angle = Converting.ConvertComplexToTrigonometric(pmu.Voltage)[1];
                 devList.Add(new PMUsDeviation(pmu.IDCode, angle - coi));
             }
             return devList;

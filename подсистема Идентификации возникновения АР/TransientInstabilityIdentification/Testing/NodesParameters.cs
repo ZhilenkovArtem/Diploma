@@ -3,7 +3,7 @@
     /// <summary>
     /// Параметры узла
     /// </summary>
-    public class NodesParameters
+    public class NodesParametrs
     {
         /// <summary>
         /// Напряжение
@@ -20,7 +20,7 @@
         /// </summary>
         /// <param name="voltage">Напряжение</param>
         /// <param name="angle">Угол напряжения</param>
-        public NodesParameters(double voltage, double angle)
+        public NodesParametrs(double voltage, double angle)
         {
             this.Voltage = voltage;
             this.Angle = angle;

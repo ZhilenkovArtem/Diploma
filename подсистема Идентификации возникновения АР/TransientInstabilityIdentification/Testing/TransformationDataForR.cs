@@ -6,14 +6,14 @@ namespace Testing
     /// <summary>
     /// Преобразование входных данных в строку
     /// </summary>
-    public class TransformationDataToString
+    public class TransformationDataForR
     {
         /// <summary>
         /// Получить строку входных данных
         /// </summary>
         /// <param name="slicesInTime">Срез данных за промежуток времени</param>
         /// <returns>Строка входных данных</returns>
-        public static string GetStringWithData(List<List<NodesParametrs>> slicesInTime)
+        public static string GetStringWithData(List<List<NodesParameters>> slicesInTime)
         {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 

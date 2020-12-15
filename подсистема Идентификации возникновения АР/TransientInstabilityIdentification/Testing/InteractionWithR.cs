@@ -7,7 +7,7 @@ namespace Testing
     /// Класс, где выполняется подключение
     /// к R и получение выходных данных
     /// </summary>
-    public class Estimation
+    public class InteractionWithR
     {
         /// <summary>
         /// Получить результат вычисления:
@@ -20,7 +20,7 @@ namespace Testing
         /// <param name="workingDirectory">Путь к скрипту</param>
         /// <param name="argument">Имя скрипта</param>
         /// <returns>Результат вычисления</returns>
-        public static string GetAnswer(List<List<NodesParametrs>> initialData, 
+        public static string GetAnswer(List<List<NodesParameters>> initialData, 
             string fileName, string workingDirectory, string argument)
         {
             System.Diagnostics.Process process = new System.Diagnostics.Process();
@@ -28,7 +28,7 @@ namespace Testing
             process.StartInfo.WorkingDirectory = workingDirectory;
             process.StartInfo.Arguments = argument;
             process.StartInfo.Arguments += 
-                TransformationDataToString.GetStringWithData(initialData);
+                TransformationDataForR.GetStringWithData(initialData);
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;

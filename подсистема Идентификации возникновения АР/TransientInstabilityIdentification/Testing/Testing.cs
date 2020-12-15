@@ -17,7 +17,7 @@ namespace Testing
                 @"\Магистрский IT\Diploma\подсистема Идентификации возникновения АР";
             var argument = "classifier.R";
 
-            var answer = Estimation.GetAnswer(TestData.GetTestData(), 
+            var answer = InteractionWithR.GetAnswer(TestData.GetTestData(), 
                 fileName, workingDirectory, argument);
 
             Console.WriteLine($"{answer}");
