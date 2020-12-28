@@ -14,7 +14,7 @@ namespace UsingOfPayload
         /// <summary>
         /// Адрес телеметрии
         /// </summary>
-        public int Address { get; set; }
+        public int ObjectAddress { get; set; }
 
         /// <summary>
         /// Значение
@@ -24,7 +24,7 @@ namespace UsingOfPayload
         /// <summary>
         /// Является ли телесигналом (ТС)
         /// </summary>
-        public bool IsTelesignal { get; set; }
+        public TypeID TypeId { get; set; }
 
         /// <summary>
         /// Конструктор данных
@@ -32,11 +32,11 @@ namespace UsingOfPayload
         /// <param name="address">Адрес</param>
         /// <param name="value">Значение</param>
         /// <param name="flag">Флаг "Является ли ТС"</param>
-        public Telemetry(int address, double value, bool flag)
+        public Telemetry(int address, double value, TypeID typeId)
         {
-            this.Address = address;
+            this.ObjectAddress = address;
             this.Value = value;
-            this.IsTelesignal = flag;
+            this.TypeId = typeId;
         }
 
         /// <summary>
