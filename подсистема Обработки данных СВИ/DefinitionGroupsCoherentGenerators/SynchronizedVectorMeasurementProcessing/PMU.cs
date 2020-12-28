@@ -10,7 +10,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <summary>
         /// ID PMU
         /// </summary>
-        public int IDCode { get; set; }
+        public float IDCode { get; set; }
 
         /// <summary>
         /// Комплексное значение напряжения
@@ -27,7 +27,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// </summary>
         /// <param name="idCode">ID</param>
         /// <param name="voltage">Напряжение</param>
-        public PMU(int idCode, Complex voltage)
+        public PMU(float idCode, Complex voltage)
         {
             this.IDCode = idCode;
             this.Voltage = voltage;
@@ -40,7 +40,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <param name="idCode">ID</param>
         /// <param name="voltage">Напряжение</param>
         /// <param name="power">Мощность</param>
-        public PMU(int idCode, Complex voltage, float power)
+        public PMU(float idCode, Complex voltage, float power)
         {
             this.IDCode = idCode;
             this.Voltage = voltage;

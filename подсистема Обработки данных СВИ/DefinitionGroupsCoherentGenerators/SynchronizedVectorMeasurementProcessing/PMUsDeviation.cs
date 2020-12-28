@@ -8,7 +8,7 @@
         /// <summary>
         /// ID PMU
         /// </summary>
-        public int PMUsIDCode { get; set; }
+        public float PMUsIDCode { get; set; }
 
         /// <summary>
         /// Отклонение угла PMU от центра инерции системы
@@ -30,7 +30,7 @@
         /// </summary>
         /// <param name="idCode">ID PMU</param>
         /// <param name="deviation">Отклонение</param>
-        public PMUsDeviation(int idCode, float deviation)
+        public PMUsDeviation(float idCode, float deviation)
         {
             this.PMUsIDCode = idCode;
             this.DeviationFromCOI = deviation;
@@ -45,7 +45,7 @@
         /// <param name="deviation">Отклонение</param>
         /// <param name="accumDeviation">Накопленное отклонение</param>
         /// <param name="delta">Разница отклонений</param>
-        public PMUsDeviation(int idCode, float deviation, 
+        public PMUsDeviation(float idCode, float deviation, 
             float accumDeviation, float delta)
         {
             this.PMUsIDCode = idCode;

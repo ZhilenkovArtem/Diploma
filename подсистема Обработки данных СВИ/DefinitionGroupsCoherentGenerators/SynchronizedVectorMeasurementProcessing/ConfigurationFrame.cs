@@ -11,11 +11,19 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <summary>
         /// Данных по всем PMU в кадре данных
         /// </summary>
-        public HashSet<PMU> Data { get; set; }
+        public List<PMU> Data { get; set; }
 
         /// <summary>
         /// Время
         /// </summary>
-        public DateTime Time { get; set; }
+        public /*DateTime*/ float Time { get; set; }
+
+        public ConfigurationFrame() { }
+
+        public ConfigurationFrame(List<PMU> data, float time)
+        {
+            this.Data = data;
+            this.Time = time;
+        }
     }
 }

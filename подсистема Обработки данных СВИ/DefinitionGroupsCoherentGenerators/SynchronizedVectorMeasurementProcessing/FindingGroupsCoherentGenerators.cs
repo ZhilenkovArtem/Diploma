@@ -13,14 +13,14 @@ namespace SynchronizedVectorMeasurementProcessing
         /// </summary>
         /// <param name="devList">Список отклонений по всем PMU</param>
         /// <returns>Группы когерентных генраторов</returns>
-        public static Tuple<List<int>, List<int>> GetGroupsCoherentGenerators(List<PMUsDeviation> devList)
+        public static Tuple<List<float>, List<float>> GetGroupsCoherentGenerators(List<PMUsDeviation> devList)
         {
-            var firstGroup = new List<int>();
-            var secondGroup = new List<int>();
+            var firstGroup = new List<float>();
+            var secondGroup = new List<float>();
             
             foreach (var pmu in devList)
             {
-                if (pmu.DeviationFromCOI > 0)
+                if (pmu.AccumulatedDeviation > 0)
                 {
                     firstGroup.Add(pmu.PMUsIDCode);
                 }

@@ -11,7 +11,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <summary>
         /// Максимальное накопленное отклонение
         /// </summary>
-        private const int MAXACCUMULATEDDEVIATION = 30;
+        private const int MAXACCUMULATEDDEVIATION = 25;
 
         /// <summary>
         /// Определить было ли возмущение

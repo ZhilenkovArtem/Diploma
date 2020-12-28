@@ -8,12 +8,12 @@ namespace SynchronizedVectorMeasurementProcessing
     /// Конфигурация объекта, представляющего собой список отклонений для
     /// каждой PMU для нескольких срезов данных (например, 4 для 60 мс)
     /// </summary>
-    class ConfigDeviationsInWithin60ms
+    public class ConfigDeviationsInWithin60ms
     {
         /// <summary>
         /// Число анализируемых срезов данных (4 среза = 60 мс)
         /// </summary>
-        private const int DEVIATIONSLISTSCOUNT = 4;
+        public const int DEVIATIONSLISTSCOUNT = 4;
 
         /// <summary>
         /// Список отклонений по срезам для 60 мс
@@ -23,10 +23,9 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <summary>
         /// Конструктор
         /// </summary>
-        /// <param name="devList">Список отклонений по всем PMU</param>
-        public ConfigDeviationsInWithin60ms(DeviationsList devList)
+        public ConfigDeviationsInWithin60ms() 
         {
-            this.DeviationsInWithin60ms = new List<DeviationsList> { devList };
+            this.DeviationsInWithin60ms = new List<DeviationsList>();
         }
 
         /// <summary>
@@ -35,9 +34,11 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <param name="devLists">Список срезов</param>
         /// <param name="newDevList">Новый срез</param>
         /// <returns>Обновленный список срезов</returns>
-        public List<DeviationsList> AddNewDevList(
-            List<DeviationsList> devLists, DeviationsList newDevList)
+        public ConfigDeviationsInWithin60ms AddNewDevList(
+            ConfigDeviationsInWithin60ms configDevLists, 
+            DeviationsList newDevList)
         {
+            var devLists = configDevLists.DeviationsInWithin60ms;
             var devListsCount = devLists.Count;
             if (devListsCount == DEVIATIONSLISTSCOUNT)
             {
@@ -56,12 +57,17 @@ namespace SynchronizedVectorMeasurementProcessing
 
                 devLists = ChangeParametersDeviationsLists(devLists);
             }
+            else if (devListsCount == 0)
+            {
+                devLists.Add(newDevList);
+            }
             else
             {
                 throw new Exception($"Число devList в списке не лежит в " +
-                    $"диапазоне от 1 до {DEVIATIONSLISTSCOUNT}");
+                    $"диапазоне от 0 до {DEVIATIONSLISTSCOUNT}");
             }
-            return devLists;
+            configDevLists.DeviationsInWithin60ms = devLists;
+            return configDevLists;
         }
 
         /// <summary>

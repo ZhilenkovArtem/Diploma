@@ -12,10 +12,12 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <returns>Тригонометрическая величина</returns>
         public static float[] ConvertComplexToTrigonometric(Complex complexValue)
         {
-            var r = (float)Math.Sqrt(Math.Pow(complexValue.Real, 2)
+            /*var r = (float)Math.Sqrt(Math.Pow(complexValue.Real, 2)
                 + Math.Pow(complexValue.Imaginary, 2));
             var f = (float)(Math.Atan2(complexValue.Imaginary,
-                complexValue.Real) * 180 / Math.PI);
+                complexValue.Real) * 180 / Math.PI);*/
+            var r = (float)complexValue.Real;
+            var f = (float)complexValue.Imaginary;
             return new float[] { r, f };
         }
     }

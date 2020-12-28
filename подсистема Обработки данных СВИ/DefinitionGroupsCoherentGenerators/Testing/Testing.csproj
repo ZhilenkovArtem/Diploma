@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -64,7 +65,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DefinitionGroupsCoherentGenerators\SynchronizedVectorMeasurementProcessing.csproj">
+    <ProjectReference Include="..\SynchronizedVectorMeasurementProcessing\SynchronizedVectorMeasurementProcessing.csproj">
       <Project>{0e27f889-7def-4b6c-b3fb-1feeda289727}</Project>
       <Name>SynchronizedVectorMeasurementProcessing</Name>
     </ProjectReference>
