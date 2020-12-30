@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A764B1C0-46C3-4F0C-A18B-3287B9036EF1}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>ServerUDP</RootNamespace>
-    <AssemblyName>ServerUDP</AssemblyName>
+    <ProjectGuid>{29B63619-8000-49B4-920D-2BA7A0AEFB81}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ControlActionsSelection</RootNamespace>
+    <AssemblyName>ControlActionsSelection</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,7 +33,6 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,25 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="SplitSlice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AsynchronyIdentification\AsynchronyIdentification.csproj">
-      <Project>{b727722d-8f8f-4def-866d-790c7e8f276b}</Project>
-      <Name>AsynchronyIdentification</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ControlActionsSelection\ControlActionsSelection.csproj">
-      <Project>{29b63619-8000-49b4-920d-2ba7a0aefb81}</Project>
-      <Name>ControlActionsSelection</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SynchronizedVectorMeasurementProcessing\SynchronizedVectorMeasurementProcessing.csproj">
-      <Project>{83087e63-fd5a-4cbc-a0fc-aa5a88b45d92}</Project>
-      <Name>SynchronizedVectorMeasurementProcessing</Name>
-    </ProjectReference>
+    <Compile Include="TestData.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Threading.Tasks;
 using AsynchronyIdentification;
+using ControlActionsSelection;
 
 namespace ServerUDP
 {
@@ -118,14 +119,26 @@ namespace ServerUDP
             {
                 var groups = FindingGroupsCoherentGenerators.
                     GetGroupsCoherentGenerators(devlist.DevList);
-                AsynchronyIdentificate(_dataForTIIS);
+
+                /*Console.WriteLine("1 group:");
+                foreach (var gen in groups.Item1)
+                {
+                    Console.Write($"{gen} ");
+                }
+                Console.WriteLine("2 group:");
+                foreach (var gen in groups.Item2)
+                {
+                    Console.Write($"{gen} ");
+                }*/
+
+                ControlActionsSelect(_dataForTIIS, groups);
                 _configDeviations = new ConfigDeviationsInWithin60ms();
                 _dataForTIIS = new List<ConfigurationRedonePmuData>();
             }
             return isFault;
         }
 
-        private static async void AsynchronyIdentificate(List<ConfigurationRedonePmuData> data)
+        private static async void ControlActionsSelect(List<ConfigurationRedonePmuData> data, Tuple<List<float>, List<float>> groups)
         {
             Console.WriteLine("Начало метода FactorialAsync");
 
@@ -135,6 +148,16 @@ namespace ServerUDP
             stopwatch.Stop();
             TimeSpan timespan = stopwatch.Elapsed;
             string elapsedTime = String.Format("{0:0000}", timespan.Milliseconds);
+
+            //List<LineSegmentForSplitting> slice;
+            if (answer == "1 " || answer == "2 ")
+            {
+                var slice = SliceSelection.SelectSlice(groups.Item1, groups.Item2);
+                foreach (var lineSegment in slice)
+                {
+                    Console.WriteLine($"{lineSegment.StartNode}-{lineSegment.EndNode}");
+                }
+            }
 
             Console.WriteLine($"Метод вернул {answer}\n" +
                 $"Время работы {elapsedTime}\n" +
