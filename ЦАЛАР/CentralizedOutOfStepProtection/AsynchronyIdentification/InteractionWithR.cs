@@ -10,8 +10,10 @@ namespace AsynchronyIdentification
     /// </summary>
     public class InteractionWithR
     {
-        private const string fileName = @"C:\Program Files\R\R-4.0.2\bin\x64\Rscript.exe";
-        private const string workingDirectory = @"C:\Users\Артем Жиленков\Desktop" +
+        private const string fileName = 
+            @"C:\Program Files\R\R-4.0.2\bin\x64\Rscript.exe";
+        private const string workingDirectory = 
+            @"C:\Users\Артем Жиленков\Desktop" +
             @"\Магистрский IT\Diploma\ЦАЛАР";
         private const string argument = "classifier.R";
         /// <summary>
@@ -25,9 +27,11 @@ namespace AsynchronyIdentification
         /// <param name="workingDirectory">Путь к скрипту</param>
         /// <param name="argument">Имя скрипта</param>
         /// <returns>Результат вычисления</returns>
-        public static string GetAnswer(List<ConfigurationRedonePmuData> initialData)
+        public static string GetAnswer(
+            List<ConfigurationRedonePmuData> initialData)
         {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            System.Diagnostics.Process process = 
+                new System.Diagnostics.Process();
             process.StartInfo.FileName = fileName;
             process.StartInfo.WorkingDirectory = workingDirectory;
             process.StartInfo.Arguments = argument;

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace SynchronizedVectorMeasurementProcessing
 {
+    /// <summary>
+    /// Класс для описания конфигурации фрейма переделанных данных
+    /// </summary>
     public class ConfigurationRedonePmuData
     {
         public List<RedonePmuData> Data { get; set; }
@@ -14,7 +13,8 @@ namespace SynchronizedVectorMeasurementProcessing
 
         public ConfigurationRedonePmuData() { }
 
-        public ConfigurationRedonePmuData(List<RedonePmuData> data, float time)
+        public ConfigurationRedonePmuData(
+            List<RedonePmuData> data, float time)
         {
             this.Data = data;
             this.Time = time;

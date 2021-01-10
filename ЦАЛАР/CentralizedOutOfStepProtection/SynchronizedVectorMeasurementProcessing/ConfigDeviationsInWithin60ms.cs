@@ -29,7 +29,8 @@ namespace SynchronizedVectorMeasurementProcessing
         }
 
         /// <summary>
-        /// Добавить новый список отклонений (срез) в список срезов (во времени)
+        /// Добавить новый список отклонений (срез) в список срезов 
+        /// (во времени)
         /// </summary>
         /// <param name="devLists">Список срезов</param>
         /// <param name="newDevList">Новый срез</param>
@@ -71,7 +72,8 @@ namespace SynchronizedVectorMeasurementProcessing
         }
 
         /// <summary>
-        /// Изменение параметров отклонений для отдельных срезов в списке срезов
+        /// Изменение параметров отклонений для отдельных срезов в 
+        /// списке срезов
         /// </summary>
         /// <param name="devLists"></param>
         /// <returns></returns>

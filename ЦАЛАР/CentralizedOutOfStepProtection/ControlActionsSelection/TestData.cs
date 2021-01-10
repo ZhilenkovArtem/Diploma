@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ControlActionsSelection
 {
+    /// <summary>
+    /// Класс тестовых данных
+    /// </summary>
     public class TestData
     {
+        /// <summary>
+        /// Получить тестовые данные
+        /// </summary>
+        /// <returns></returns>
         public static List<SplitSlice> GetTestData()
         {
             return new List<SplitSlice>
@@ -16,15 +19,357 @@ namespace ControlActionsSelection
                 {
                     FirstGroup = new List<float>
                     {
-                        33009, 33010, 33012, 33013, 33014, 33016, 21007, 21008,
-                        21009, 21010, 21011, 21012, 22001, 22003, 22004,
-                        2071, 2072, 2073, 2074, 2076, 2077, 2078, 2082,
-                        2086, 2098, 2101, 2107
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
                     },
                     SecondGroup = new List<float>
                     {
-                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024, 1029,
-                        1056, 1058, 1060, 1061, 1062
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
                     },
                     Slice = new List<LineSegmentForSplitting>
                     {
@@ -36,14 +381,36 @@ namespace ControlActionsSelection
                 {
                     FirstGroup = new List<float>
                     {
-                        33009, 33010, 33012, 33013, 33014, 33016, 21007, 21008,
-                        21009, 21010, 21011, 21012, 22001, 22003, 22004
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004, 2071, 2072, 2073, 2074, 2076, 2077, 2078,
+                        2082, 2086, 2098, 2101, 2107
                     },
                     SecondGroup = new List<float>
                     {
-                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024, 1029,
-                        1056, 1058, 1060, 1061, 1062, 2071, 2072, 2073, 2074,
-                        2076, 2077, 2078, 2082, 2086, 2098, 2101, 2107
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062
+                    },
+                    Slice = new List<LineSegmentForSplitting>
+                    {
+                        new LineSegmentForSplitting(60401107, 60401044),
+                        new LineSegmentForSplitting(60401108, 60401045)
+                    }
+                },
+                new SplitSlice
+                {
+                    FirstGroup = new List<float>
+                    {
+                        33009, 33010, 33012, 33013, 33014, 33016, 21007,
+                        21008, 21009, 21010, 21011, 21012, 22001, 22003,
+                        22004
+                    },
+                    SecondGroup = new List<float>
+                    {
+                        1012, 1013, 1014, 1015, 1016, 1017, 1018, 1024,
+                        1029, 1056, 1058, 1060, 1061, 1062, 2071, 2072,
+                        2073, 2074, 2076, 2077, 2078, 2082, 2086, 2098,
+                        2101, 2107
                     },
                     Slice = new List<LineSegmentForSplitting>
                     {

@@ -45,7 +45,6 @@
     <Compile Include="ConfigDeviationsInWithin60ms.cs" />
     <Compile Include="ConfigurationFrame.cs" />
     <Compile Include="ConfigurationRedonePmuData.cs" />
-    <Compile Include="Converting.cs" />
     <Compile Include="DetectionOfFault.cs" />
     <Compile Include="DeviationsList.cs" />
     <Compile Include="FindingGroupsCoherentGenerators.cs" />

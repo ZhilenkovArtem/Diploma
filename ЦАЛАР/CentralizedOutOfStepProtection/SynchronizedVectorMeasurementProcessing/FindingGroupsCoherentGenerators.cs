@@ -13,7 +13,8 @@ namespace SynchronizedVectorMeasurementProcessing
         /// </summary>
         /// <param name="devList">Список отклонений по всем PMU</param>
         /// <returns>Группы когерентных генраторов</returns>
-        public static Tuple<List<float>, List<float>> GetGroupsCoherentGenerators(List<PMUsDeviation> devList)
+        public static Tuple<List<float>, List<float>> GetGroupsCoherentGenerators(
+            List<PMUsDeviation> devList)
         {
             var firstGroup = new List<float>();
             var secondGroup = new List<float>();

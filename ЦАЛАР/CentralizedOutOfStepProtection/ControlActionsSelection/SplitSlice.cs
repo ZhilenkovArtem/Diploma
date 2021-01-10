@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace ControlActionsSelection
 {
+    /// <summary>
+    /// Класс, описывающий структуру среза данных
+    /// </summary>
     public class SplitSlice
     {
         public List<float> FirstGroup { get; set; }
@@ -15,6 +14,9 @@ namespace ControlActionsSelection
         public List<LineSegmentForSplitting> Slice { get; set; }
     }
 
+    /// <summary>
+    /// Структура данных для сегмента 
+    /// </summary>
     public struct LineSegmentForSplitting
     {
         public int StartNode { get; set; }
@@ -28,9 +30,13 @@ namespace ControlActionsSelection
         }
     }
 
+    /// <summary>
+    /// Выбор сечения
+    /// </summary>
     public class SliceSelection
     {
-        public static List<LineSegmentForSplitting> SelectSlice(List<float> group1, List<float> group2)
+        public static List<LineSegmentForSplitting> SelectSlice(
+            List<float> group1, List<float> group2)
         {
             var sliceList = TestData.GetTestData();
             bool flag;
@@ -60,7 +66,6 @@ namespace ControlActionsSelection
                 if (flag == true)
                 {
                     return slice.Slice;
-                    break;
                 }
             }
             return new List<LineSegmentForSplitting>();

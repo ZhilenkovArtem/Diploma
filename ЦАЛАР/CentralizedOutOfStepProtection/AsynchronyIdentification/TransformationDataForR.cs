@@ -14,7 +14,8 @@ namespace AsynchronyIdentification
         /// </summary>
         /// <param name="slicesInTime">Срез данных за промежуток времени</param>
         /// <returns>Строка входных данных</returns>
-        public static string GetStringWithData(List<ConfigurationRedonePmuData> slicesInTime)
+        public static string GetStringWithData(
+            List<ConfigurationRedonePmuData> slicesInTime)
         {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
@@ -30,7 +31,8 @@ namespace AsynchronyIdentification
                 {
                     massive[i, j] = parametrs.VoltagePhase.ToString("0.00");
                     i++;
-                    massive[i, j] = parametrs.VoltageMagnitude.ToString("0.00");
+                    massive[i, j] = 
+                        parametrs.VoltageMagnitude.ToString("0.00");
                     i++;
                 }
                 j++;

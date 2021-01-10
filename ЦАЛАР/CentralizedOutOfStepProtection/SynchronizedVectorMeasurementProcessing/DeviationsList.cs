@@ -60,12 +60,14 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <param name="data">Данные по всем PMU в кадре</param>
         /// <param name="coi">Центр инерции</param>
         /// <returns>Список отклонений</returns>
-        private List<PMUsDeviation> GetDevList(List<RedonePmuData> data, float coi)
+        private List<PMUsDeviation> GetDevList(
+            List<RedonePmuData> data, float coi)
         {
             var devList = new List<PMUsDeviation>();
             foreach (var pmu in data)
             {
-                devList.Add(new PMUsDeviation(pmu.IDCode, pmu.VoltagePhase - coi));
+                devList.Add(new PMUsDeviation(
+                    pmu.IDCode, pmu.VoltagePhase - coi));
             }
             return devList;
         }

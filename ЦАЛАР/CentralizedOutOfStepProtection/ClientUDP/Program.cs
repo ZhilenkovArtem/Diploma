@@ -4,38 +4,48 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
-using SynchronizedVectorMeasurementProcessing;
 
 namespace ClientUDP
 {
+    /// <summary>
+    /// Класс, реализующий функции КСВД, передающей СВИ серверу ЦАЛАР
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// Порт сервера
+        /// </summary>
         const int remotePort = 5000;
+        /// <summary>
+        /// Программный интерфейс для обеспечения обмена данными
+        /// </summary>
         static Socket listeningSocket;
 
-        static void Main(string[] args)
+        /// <summary>
+        /// Точка входа
+        /// </summary>
+        static void Main()
         {
             var frameList = TestData.GetTestData();
-            //int[] massive = new int[] { 1, 2, 3 };
-            //Console.WriteLine("Для отправки сообщений введите сообщение и нажмите Enter");
 
             try
             {
-                listeningSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+                listeningSocket = new Socket(AddressFamily.InterNetwork, 
+                    SocketType.Dgram, ProtocolType.Udp);
                 
-                foreach (var frame in frameList) //for (int i = 0; i < massive.Length; i++)
+                foreach (var frame in frameList)
                 {
                     var binaryFormatter = new BinaryFormatter();
                     var memoryStream = new MemoryStream();
-                    binaryFormatter.Serialize(memoryStream, /*massive[i]*/frame);
+                    binaryFormatter.Serialize(memoryStream, frame);
 
                     byte[] data = memoryStream.ToArray();//Encoding.Unicode.GetBytes();
-                    EndPoint remotePoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), remotePort);
+                    EndPoint remotePoint = new IPEndPoint(
+                        IPAddress.Parse("127.0.0.1"), remotePort);
                     listeningSocket.SendTo(data, remotePoint);
 
                     Thread.Sleep(100);
                 }
-
                 /*while (true)
                 {
                     string message = Console.ReadLine();
@@ -55,7 +65,10 @@ namespace ClientUDP
             }
             Console.ReadKey();
         }
-                        
+
+        /// <summary>
+        /// Закрывает интерфейса обмена данными
+        /// </summary>
         private static void Close()
         {
             if (listeningSocket != null)

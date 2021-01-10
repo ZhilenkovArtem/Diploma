@@ -9,6 +9,9 @@ using System.Numerics;
 
 namespace ClientUDP
 {
+    /// <summary>
+    /// Данные для передачи серверу ЦАЛАР
+    /// </summary>
     public class TestData
     {
         public static List<ConfigurationFrame> GetTestData()
@@ -107,6 +110,11 @@ namespace ClientUDP
             return frameList;
         }
 
+        /// <summary>
+        /// Получает параметры узлов
+        /// </summary>
+        /// <param name="directory">директория с файлами с данными</param>
+        /// <returns>Лист с данными по узлам сети</returns>
         private static List<Node> GetNodesParameters(DirectoryInfo directory)
         {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
@@ -117,13 +125,16 @@ namespace ClientUDP
                 IEnumerable<NodeDataFormat> data;
                 if (Path.GetExtension(file.FullName) == ".csv")
                 {
-                    using (StreamReader reader = new StreamReader(file.FullName))
+                    using (StreamReader reader = 
+                        new StreamReader(file.FullName))
                     {
-                        using (CsvReader csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+                        using (CsvReader csvReader = 
+                            new CsvReader(reader, CultureInfo.CurrentCulture))
                         {
                             csvReader.Configuration.Delimiter = ";";
                             data = csvReader.GetRecords<NodeDataFormat>();
-                            var ca = float.Parse(file.Name.Substring(3, file.Name.Length - 7));
+                            var ca = float.Parse(
+                                file.Name.Substring(3, file.Name.Length - 7));
 
                             eesObjectsData.Add(new Node(ca, data.ToList()));
                         }
@@ -133,7 +144,13 @@ namespace ClientUDP
             return eesObjectsData;
         }
 
-        private static List<Generator> GetGeneratorsParameters(DirectoryInfo directory)
+        /// <summary>
+        /// Получает параметры генераторов
+        /// </summary>
+        /// <param name="directory">директория с файлами с данными</param>
+        /// <returns>Лист с данными по генераторам</returns>
+        private static List<Generator> GetGeneratorsParameters(
+            DirectoryInfo directory)
         {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
             var eesObjectsData = new List<Generator>();
@@ -143,15 +160,19 @@ namespace ClientUDP
                 IEnumerable<GeneratorDataFormat> data;
                 if (file.Extension == ".csv")
                 {
-                    using (StreamReader reader = new StreamReader(file.FullName))
+                    using (StreamReader reader = 
+                        new StreamReader(file.FullName))
                     {
-                        using (CsvReader csvReader = new CsvReader(reader, CultureInfo.CurrentCulture))
+                        using (CsvReader csvReader = 
+                            new CsvReader(reader, CultureInfo.CurrentCulture))
                         {
                             csvReader.Configuration.Delimiter = ";";
                             data = csvReader.GetRecords<GeneratorDataFormat>();
-                            var ca = float.Parse(file.Name.Substring(3, file.Name.Length - 7));
+                            var ca = float.Parse(
+                                file.Name.Substring(3, file.Name.Length - 7));
 
-                            eesObjectsData.Add(new Generator(ca, data.ToList()));
+                            eesObjectsData.Add(
+                                new Generator(ca, data.ToList()));
                         }
                     }
                 }
@@ -160,6 +181,9 @@ namespace ClientUDP
         }
     }
 
+    /// <summary>
+    /// Формат записи данных по узлам сети
+    /// </summary>
     public class NodeDataFormat
     {
         public float Time { get; set; }
@@ -169,6 +193,9 @@ namespace ClientUDP
         public float Angle { get; set; }
     }
 
+    /// <summary>
+    /// Данные узла сети
+    /// </summary>
     public class Node
     {
         public float CommonAddress { get; set; }
@@ -182,6 +209,9 @@ namespace ClientUDP
         }
     }
 
+    /// <summary>
+    /// Формат записи данных по генераторам
+    /// </summary>
     public class GeneratorDataFormat
     {
         public float Time { get; set; }
@@ -189,6 +219,9 @@ namespace ClientUDP
         public string Power { get; set; }
     }
 
+    /// <summary>
+    /// Данные генератора
+    /// </summary>
     public class Generator
     {
         public float CommonAddress { get; set; }
@@ -202,13 +235,14 @@ namespace ClientUDP
         }
     }
 
+    /// <summary>
+    /// Данные общего вида
+    /// </summary>
     public class CommonData
     {
         public float CommonAddress { get; set; }
 
         public List<CommonDataFormat> Data { get; set; }
-
-        public CommonData() { }
 
         public CommonData(float ca, List<CommonDataFormat> data)
         {
@@ -217,6 +251,9 @@ namespace ClientUDP
         }
     }
 
+    /// <summary>
+    /// Общий формат записи данных
+    /// </summary>
     public class CommonDataFormat
     {
         public float Time { get; set; }
