@@ -11,6 +11,12 @@ namespace UsingOfPayload
         {
             var pathForTelemetries = telemetriesPath;
             var telemetries = Telemetry.LoadList(pathForTelemetries);
+            foreach (var telemetry in telemetries)
+            {
+                Console.WriteLine($"oa = {telemetry.ObjectAddress}\t" +
+                    $"value = {telemetry.Value}\t" +
+                    $"type = {telemetry.TypeId}");
+            }
             var modeRatingList = new List<ModeRating>();
 
             DirectoryInfo directory = new DirectoryInfo(path);
@@ -29,7 +35,7 @@ namespace UsingOfPayload
                     var data = dataSet.Where(d => d.ID == telemetry.ObjectAddress).FirstOrDefault();
                     if (data != null)
                     {
-                        if (telemetry.TypeId == TypeID.SinglePointInformation)
+                        if (telemetry.TypeId == TypeId.SinglePointInformation)
                         {
                             if (data.Value == telemetry.Value)
                             {
@@ -37,7 +43,7 @@ namespace UsingOfPayload
                             }
                             telesignalsQuantity++;
                         }
-                        else if (telemetry.TypeId == TypeID.MeasuredValueShort)
+                        else if (telemetry.TypeId == TypeId.MeasuredValueShort)
                         {
                             var deviation = GetValue(Math.Abs(telemetry.Value), Math.Abs(data.Value))
                                 * data.Weight;
@@ -51,17 +57,19 @@ namespace UsingOfPayload
                 var rating = (1 - telesignalsCoincidence) + (telemetriesDiscrepancy);
                 modeRatingList.Add(new ModeRating(item.Name, rating));
             }
-
+            Console.WriteLine("count: " + modeRatingList.Count);
             double min = 1;
             string mode = "";
             foreach (var modeRating in modeRatingList)
             {
+                Console.WriteLine($"name: {modeRating.name}\trating: {modeRating.rating}");
                 if (modeRating.rating < min)
                 {
                     min = modeRating.rating;
                     mode = modeRating.name;
                 }
             }
+            Console.WriteLine();
             return mode;
         }
 

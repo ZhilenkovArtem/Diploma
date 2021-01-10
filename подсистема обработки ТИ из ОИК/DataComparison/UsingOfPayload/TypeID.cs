@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UsingOfPayload
 {
-    public enum TypeID
+    public enum TypeId
     {
         SinglePointInformation = 0,
         MeasuredValueShort = 1
