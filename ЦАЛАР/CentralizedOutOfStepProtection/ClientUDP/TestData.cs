@@ -23,7 +23,7 @@ namespace ClientUDP
             var pathToStable = Path.Combine(pathToTestData, "Stable");
             var pathToUnstableSlow = Path.Combine(pathToTestData, "UnstableSlow");
             var pathToUnstableFast = Path.Combine(pathToTestData, "UnstableFast");
-            var slice = Path.Combine(pathToUnstableSlow, "7");
+            var slice = Path.Combine(pathToUnstableSlow, "36");
 
             // Лист множества данных каждого из узлов всех объектов электроэнергетики во времени
             var multiplicityNodesData = new List<Node>();

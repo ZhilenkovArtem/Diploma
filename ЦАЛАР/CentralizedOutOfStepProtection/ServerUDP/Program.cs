@@ -198,11 +198,11 @@ namespace ServerUDP
                     Console.WriteLine($"{lineSegment.StartNode}-" +
                         $"{lineSegment.EndNode}");
                 }*/
-                Console.WriteLine(elapsedTime + " ms");
+                //Console.WriteLine(elapsedTime + " ms");
             }
 
-            /*Console.WriteLine($"Метод вернул {answer}\n" +
-                $"Время работы {elapsedTime} ms\n" +
+            Console.WriteLine($"Метод вернул {answer}");
+            /*Console.WriteLine($"Время работы {elapsedTime} ms\n" +
                 $"Конец метода ControlActionsSelect");*/
         }
 
