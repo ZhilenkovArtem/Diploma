@@ -55,6 +55,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\C37Library\C37Library.csproj">
+      <Project>{10c025a3-d5e6-472d-8aeb-fcba519b6165}</Project>
+      <Name>C37Library</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SynchronizedVectorMeasurementProcessing\SynchronizedVectorMeasurementProcessing.csproj">
       <Project>{83087e63-fd5a-4cbc-a0fc-aa5a88b45d92}</Project>
       <Name>SynchronizedVectorMeasurementProcessing</Name>

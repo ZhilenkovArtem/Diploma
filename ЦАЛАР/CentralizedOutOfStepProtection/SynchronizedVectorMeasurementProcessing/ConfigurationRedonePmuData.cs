@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace SynchronizedVectorMeasurementProcessing
 {
@@ -9,12 +10,12 @@ namespace SynchronizedVectorMeasurementProcessing
     {
         public List<RedonePmuData> Data { get; set; }
 
-        public float Time { get; set; }
+        public DateTime Time { get; set; }
 
         public ConfigurationRedonePmuData() { }
 
         public ConfigurationRedonePmuData(
-            List<RedonePmuData> data, float time)
+            List<RedonePmuData> data, DateTime time)
         {
             this.Data = data;
             this.Time = time;

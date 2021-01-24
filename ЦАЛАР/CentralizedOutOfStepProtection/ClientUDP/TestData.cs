@@ -6,6 +6,7 @@ using CsvHelper;
 using System.IO;
 using System.Globalization;
 using System.Numerics;
+using C37Library;
 
 namespace ClientUDP
 {
@@ -14,7 +15,7 @@ namespace ClientUDP
     /// </summary>
     public class TestData
     {
-        public static List<ConfigurationFrame> GetTestData()
+        public static List<Frames> GetTestData()
         {
             CultureInfo.CurrentCulture = CultureInfo.GetCultureInfo("en-US");
 
@@ -23,7 +24,7 @@ namespace ClientUDP
             var pathToStable = Path.Combine(pathToTestData, "Stable");
             var pathToUnstableSlow = Path.Combine(pathToTestData, "UnstableSlow");
             var pathToUnstableFast = Path.Combine(pathToTestData, "UnstableFast");
-            var slice = Path.Combine(pathToUnstableSlow, "36");
+            var slice = Path.Combine(pathToUnstableSlow, "7");
 
             // Лист множества данных каждого из узлов всех объектов электроэнергетики во времени
             var multiplicityNodesData = new List<Node>();
@@ -95,7 +96,7 @@ namespace ClientUDP
                 multiplicityData.Add(new CommonData(node.CommonAddress, cData));
             }
 
-            var frameList = new List<ConfigurationFrame>();
+            /*var frameList = new List<ConfigurationFrame>();
             var dataCount = multiplicityData[0].Data.Count();
             for (int i = 0; i < dataCount; i++)
             {                
@@ -105,6 +106,54 @@ namespace ClientUDP
                     pMUs.Add(new PMU(cd.CommonAddress, cd.Data[i].Voltage, cd.Data[i].Power));
                 }
                 frameList.Add(new ConfigurationFrame(pMUs, multiplicityData[0].Data[i].Time));
+            }*/
+            var frameList = new List<Frames>();
+            var dataCount = multiplicityData[0].Data.Count();
+            var dt = DateTime.Now;
+            for (int i = 0; i < dataCount; i++)
+            {
+                var frames = new Frames();
+                frames.Header = new HeaderFrame("");
+                var config = new ConfigFrame();
+
+                config.SOC = uint.Parse($"{dt.ToString("dd")}{dt.ToString("MM")}{dt.ToString("yyyy")}");
+                config.FRACSEC = uint.Parse($"{dt.ToString("HH")}{dt.ToString("mm")}{dt.ToString("ss")}{dt.ToString("ff")}");
+                dt = dt.AddMilliseconds(20);
+
+                var listPMU = config.PMUStationList;
+                foreach (var cd in multiplicityData)
+                {
+                    if (cd.Data[i].Power != float.NaN)
+                    {
+                        var pmu = new PMUStation(cd.CommonAddress.ToString(), 
+                            cd.CommonAddress, false, true, true, false);
+
+                        pmu.PhasorAdd("", 1, 0);
+                        pmu.AnalogAdd("", 2, 0);
+                        pmu.FNOM = (ushort)FreqNom.FN50HZ;
+                        pmu.PhasorValues[0] = cd.Data[i].Voltage;
+                        pmu.AnalogValues[0] = cd.Data[i].Power;
+
+                        config.PMUStationAdd(pmu);
+                    }
+                    else
+                    {
+                        var pmu = new PMUStation(cd.CommonAddress.ToString(), 
+                            cd.CommonAddress, false, false, true, false);
+
+                        pmu.PhasorAdd("", 1, 0);
+                        pmu.FNOM = (ushort)FreqNom.FN50HZ;
+                        pmu.PhasorValues[0] = cd.Data[i].Voltage;
+
+                        config.PMUStationAdd(pmu);
+                    }
+                }
+
+                frames.Config = config;
+                frames.Data = new DataFrame(config);
+                frames.Command = new CMDFrame();
+
+                frameList.Add(frames);
             }
 
             return frameList;
@@ -133,7 +182,7 @@ namespace ClientUDP
                         {
                             csvReader.Configuration.Delimiter = ";";
                             data = csvReader.GetRecords<NodeDataFormat>();
-                            var ca = float.Parse(
+                            var ca = ushort.Parse(
                                 file.Name.Substring(3, file.Name.Length - 7));
 
                             eesObjectsData.Add(new Node(ca, data.ToList()));
@@ -168,7 +217,7 @@ namespace ClientUDP
                         {
                             csvReader.Configuration.Delimiter = ";";
                             data = csvReader.GetRecords<GeneratorDataFormat>();
-                            var ca = float.Parse(
+                            var ca = ushort.Parse(
                                 file.Name.Substring(3, file.Name.Length - 7));
 
                             eesObjectsData.Add(
@@ -198,11 +247,11 @@ namespace ClientUDP
     /// </summary>
     public class Node
     {
-        public float CommonAddress { get; set; }
+        public ushort CommonAddress { get; set; }
 
         public List<NodeDataFormat> VoltageValues { get; set; }
 
-        public Node(float ca, List<NodeDataFormat> values)
+        public Node(ushort ca, List<NodeDataFormat> values)
         {
             this.CommonAddress = ca;
             this.VoltageValues = values;
@@ -224,11 +273,11 @@ namespace ClientUDP
     /// </summary>
     public class Generator
     {
-        public float CommonAddress { get; set; }
+        public ushort CommonAddress { get; set; }
 
         public List<GeneratorDataFormat> PowerValues { get; set; }
 
-        public Generator(float ca, List<GeneratorDataFormat> values)
+        public Generator(ushort ca, List<GeneratorDataFormat> values)
         {
             this.CommonAddress = ca;
             this.PowerValues = values;
@@ -240,11 +289,11 @@ namespace ClientUDP
     /// </summary>
     public class CommonData
     {
-        public float CommonAddress { get; set; }
+        public ushort CommonAddress { get; set; }
 
         public List<CommonDataFormat> Data { get; set; }
 
-        public CommonData(float ca, List<CommonDataFormat> data)
+        public CommonData(ushort ca, List<CommonDataFormat> data)
         {
             this.CommonAddress = ca;
             this.Data = data;
@@ -282,5 +331,16 @@ namespace ClientUDP
             this.Power = float.NaN;
             this.Time = time;
         }
+    }
+
+    public class Frames
+    {
+        public HeaderFrame Header { get; set; }
+
+        public ConfigFrame Config { get; set; }
+
+        public DataFrame Data { get; set; }
+
+        public CMDFrame Command { get; set; }
     }
 }

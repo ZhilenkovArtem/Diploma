@@ -11,7 +11,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <summary>
         /// ID PMU
         /// </summary>
-        public float IDCode { get; set; }
+        public ushort IDCode { get; set; }
 
         /// <summary>
         /// Амплитуда напряжения
@@ -34,7 +34,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <param name="idCode">id</param>
         /// <param name="voltageMagnitude">амплитуда напряжения</param>
         /// <param name="voltagePhase">фаза напряжения</param>
-        public RedonePmuData(float idCode, float voltageMagnitude, float voltagePhase)
+        public RedonePmuData(ushort idCode, float voltageMagnitude, float voltagePhase)
         {
             this.IDCode = idCode;
             this.VoltageMagnitude = voltageMagnitude;
@@ -49,7 +49,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <param name="voltageMagnitude">амплитуда напряжения</param>
         /// <param name="voltagePhase">фаза напряжения</param>
         /// <param name="power">мощность</param>
-        public RedonePmuData(float idCode, float voltageMagnitude, float voltagePhase, float power)
+        public RedonePmuData(ushort idCode, float voltageMagnitude, float voltagePhase, float power)
         {
             this.IDCode = idCode;
             this.VoltageMagnitude = voltageMagnitude;

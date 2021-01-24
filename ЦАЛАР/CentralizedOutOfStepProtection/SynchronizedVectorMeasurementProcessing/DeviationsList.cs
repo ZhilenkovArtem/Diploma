@@ -22,7 +22,7 @@ namespace SynchronizedVectorMeasurementProcessing
         /// <summary>
         /// Время
         /// </summary>
-        public float Time { get; set; }
+        public DateTime Time { get; set; }
 
         /// <summary>
         /// Конструктор

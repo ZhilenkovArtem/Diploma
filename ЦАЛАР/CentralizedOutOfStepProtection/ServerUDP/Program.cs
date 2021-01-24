@@ -10,6 +10,8 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using AsynchronyIdentification;
 using ControlActionsSelection;
+using System.Net;
+using C37Library;
 
 namespace ServerUDP
 {
@@ -18,6 +20,13 @@ namespace ServerUDP
     /// </summary>
     class Program
     {
+        private const ushort A_SYNC_AA = 0xAA;
+        private const ushort A_SYNC_DATA = 0x01;
+        private const ushort A_SYNC_HDR = 0x11;
+        private const ushort A_SYNC_CFG1 = 0x21;
+        private const ushort A_SYNC_CFG2 = 0x31;
+        private const ushort A_SYNC_CMD = 0x41;
+
         /// <summary>
         /// Порт сервера
         /// </summary>
@@ -44,6 +53,12 @@ namespace ServerUDP
         static ConfigurationRedonePmuData _previousRedoneConfig = 
             new ConfigurationRedonePmuData();
 
+
+        static HeaderFrame _header = new HeaderFrame("");
+        static ConfigFrame _config = new ConfigFrame();
+        static DataFrame _dataFrame = new DataFrame(_config);
+        static CMDFrame _cmdFrame = new CMDFrame();
+
         /// <summary>
         /// Точка входа
         /// </summary>
@@ -66,16 +81,65 @@ namespace ServerUDP
                     EndPoint remoteIp = new IPEndPoint(IPAddress.Any, 0);
 
                     bytes = _listeningSocket.ReceiveFrom(data, ref remoteIp);
-                    var memoryStream = new MemoryStream();
+
+                    switch ((ushort)data[0])
+                    {
+                        case A_SYNC_HDR:
+                            {
+                                //Console.WriteLine("Получен кадр A_SYNC_HDR");                                
+                                _header.Unpack(data);
+                            };
+                        break;
+                        case A_SYNC_CFG2:
+                            {
+                                //Console.WriteLine("Получен кадр A_SYNC_CFG2");
+                                _config.Unpack(data);                                
+                            };
+                        break;
+                        case A_SYNC_DATA:
+                            {
+                                //Console.WriteLine("Получен кадр A_SYNC_DATA");
+                                _dataFrame = new DataFrame(_config);
+                                _dataFrame.Unpack(data);
+                                var isFault = DetectDisturbance(
+                                    _dataFrame.AssociateCurrentConfig);
+                                /*var strSOC = _dataFrame.AssociateCurrentConfig.SOC.ToString();
+                                var strFRACSEC = _dataFrame.AssociateCurrentConfig.FRACSEC.ToString();
+                                var time = new DateTime(
+                                    int.Parse(strSOC.Substring(4, 4)),
+                                    int.Parse(strSOC.Substring(2, 2)), 
+                                    int.Parse(strSOC.Substring(0, 2)),
+                                    int.Parse(strFRACSEC.Substring(0, 2)),
+                                    int.Parse(strFRACSEC.Substring(2, 2)),
+                                    int.Parse(strFRACSEC.Substring(4, 2)),
+                                    int.Parse(strFRACSEC.Substring(6, 2) + "0"));
+                                Console.WriteLine($"{time}.{time.Millisecond}");*/
+                            }
+                        break;
+                        case A_SYNC_CMD:
+                            {
+                                //Console.WriteLine("Получен кадр A_SYNC_CMD");
+                                _cmdFrame.Unpack(data);
+                            }
+                        break;
+                    }
+
+                    //byte[] syncByte = new byte[1];
+                    //syncByte[0] = data[3];
+                    //var hf = BitConverter.ToInt32(data, 0);
+                    //var sync = IPAddress.NetworkToHostOrder(hf);
+                    //Console.WriteLine($"{string.Join(" ", data)}");
+
+                    /*var memoryStream = new MemoryStream();
                     var binaryFormatter = new BinaryFormatter();
                     memoryStream.Write(data, 0, data.Length);
                     memoryStream.Seek(0, SeekOrigin.Begin);
                     var frame = (ConfigurationFrame)binaryFormatter.
-                        Deserialize(memoryStream);
+                        Deserialize(memoryStream);*/
                     
                     /*Stopwatch stopwatch = new Stopwatch();
                     stopwatch.Start();*/
-                    var isFault = DetectDisturbance(frame);
+                    /*var isFault = DetectDisturbance(frame);*/
                     /*stopwatch.Stop();
                     TimeSpan timespan = stopwatch.Elapsed;
                     string elapsedTime = String.Format(
@@ -123,7 +187,7 @@ namespace ServerUDP
         /// </summary>
         /// <param name="frame">фрейм данных в момент времени</param>
         /// <returns>Значение, было ли возмущение</returns>
-        private static bool DetectDisturbance(ConfigurationFrame frame)
+        private static bool DetectDisturbance(ConfigFrame frame)
         {
             var redoneConfig = new ConfigurationRedonePmuData();
             if (_configDeviations.DeviationsInWithin60ms.Count != 0)
@@ -212,11 +276,11 @@ namespace ServerUDP
         /// <param name="frame">фрейм</param>
         /// <returns></returns>
         private static ConfigurationRedonePmuData GetFirstConfig(
-            ConfigurationFrame frame)
+            ConfigFrame frame)
         {
             var pmuDataList = new List<RedonePmuData>();
 
-            for (int i = 0; i < frame.Data.Count; i++)
+            /*for (int i = 0; i < frame.Data.Count; i++)
             {
                 var angleOfCurrentFrame = 
                     (float)(frame.Data[i].Voltage.Phase * 180 / Math.PI);
@@ -225,7 +289,31 @@ namespace ServerUDP
                     (float)frame.Data[i].Voltage.Magnitude,
                     angleOfCurrentFrame, frame.Data[i].Power));
             }
-            return new ConfigurationRedonePmuData(pmuDataList, frame.Time);
+            return new ConfigurationRedonePmuData(pmuDataList, frame.Time);*/
+
+            foreach (var pmu in frame.PMUStationList)
+            {
+                var idCode = pmu.IDCODE;
+                var angle = 
+                    (float)(pmu.PhasorValues[0].Phase * 180 / Math.PI);
+                var magnitude = (float)pmu.PhasorValues[0].Magnitude;
+
+                if (pmu.AnalogNumber != 0)
+                {
+                    var power = pmu.AnalogValues[0];
+
+                    pmuDataList.Add(
+                    new RedonePmuData(idCode, magnitude, angle, power));
+                }
+                else
+                {
+                    pmuDataList.Add(
+                        new RedonePmuData(idCode, magnitude, angle));
+                }
+            }
+            var time = GetDateTime(frame.SOC, frame.FRACSEC);
+
+            return new ConfigurationRedonePmuData(pmuDataList, time);
         }
 
         /// <summary>
@@ -235,17 +323,22 @@ namespace ServerUDP
         /// <param name="previousConfig">предыдущий фрейм</param>
         /// <returns></returns>
         private static ConfigurationRedonePmuData GetActualConfig(
-            ConfigurationFrame currentFrame, 
+            ConfigFrame currentFrame, 
             ConfigurationRedonePmuData previousConfig)
         {
             var pmuDataList = new List<RedonePmuData>();
 
-            for (int i = 0; i < currentFrame.Data.Count; i++)
+            for (int i = 0; i < currentFrame.PMUStationList.Count; i++)
             {
-                var angleOfCurrentFrame = 
-                    (float)(currentFrame.Data[i].Voltage.Phase * 180 / Math.PI);
-                var angleOfPreviousFrame = previousConfig.Data[i].VoltagePhase;
+                var pmu = currentFrame.PMUStationList[0];
 
+                var idCodeOfCurrentFrame = pmu.IDCODE;
+                var angleOfCurrentFrame = 
+                    (float)(pmu.PhasorValues[0].Phase * 180 / Math.PI);
+                var magnitudeOfCurrentFrame = 
+                    (float)pmu.PhasorValues[0].Magnitude;
+
+                var angleOfPreviousFrame = previousConfig.Data[i].VoltagePhase;
                 if ((angleOfCurrentFrame - angleOfPreviousFrame) < -250)
                 {
                     angleOfCurrentFrame = angleOfCurrentFrame + 360;
@@ -255,12 +348,38 @@ namespace ServerUDP
                     angleOfCurrentFrame = angleOfCurrentFrame - 360;
                 }
 
-                pmuDataList.Add(new RedonePmuData(currentFrame.Data[i].IDCode,
-                    (float)currentFrame.Data[i].Voltage.Magnitude, 
-                    angleOfCurrentFrame, currentFrame.Data[i].Power));
+                if (pmu.AnalogNumber != 0)
+                {
+                    pmuDataList.Add(
+                        new RedonePmuData(idCodeOfCurrentFrame,
+                        magnitudeOfCurrentFrame,
+                        angleOfCurrentFrame, pmu.AnalogValues[0]));
+                }
+                else
+                {
+                    pmuDataList.Add(
+                        new RedonePmuData(idCodeOfCurrentFrame, 
+                        magnitudeOfCurrentFrame, angleOfCurrentFrame));
+                }
             }
+            var time = GetDateTime(currentFrame.SOC, currentFrame.FRACSEC);
+
             return new ConfigurationRedonePmuData(
-                pmuDataList, currentFrame.Time);
+                pmuDataList, time);
+        }
+
+        private static DateTime GetDateTime(uint soc, uint fracsec)
+        {
+            var strSOC = soc.ToString();
+            var strFRACSEC = fracsec.ToString();
+            return new DateTime(
+                int.Parse(strSOC.Substring(4, 4)),
+                int.Parse(strSOC.Substring(2, 2)),
+                int.Parse(strSOC.Substring(0, 2)),
+                int.Parse(strFRACSEC.Substring(0, 2)),
+                int.Parse(strFRACSEC.Substring(2, 2)),
+                int.Parse(strFRACSEC.Substring(4, 2)),
+                int.Parse(strFRACSEC.Substring(6, 2) + "0"));
         }
 
         /// <summary>
