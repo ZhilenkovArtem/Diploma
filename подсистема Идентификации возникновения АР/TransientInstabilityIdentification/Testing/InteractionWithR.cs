@@ -27,8 +27,10 @@ namespace Testing
             process.StartInfo.FileName = fileName;
             process.StartInfo.WorkingDirectory = workingDirectory;
             process.StartInfo.Arguments = argument;
-            process.StartInfo.Arguments += 
-                TransformationDataForR.GetStringWithData(initialData);
+            var str = TransformationDataForR.GetStringWithData(initialData);
+            Console.WriteLine(str);
+            process.StartInfo.Arguments += str;
+                //TransformationDataForR.GetStringWithData(initialData);
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
