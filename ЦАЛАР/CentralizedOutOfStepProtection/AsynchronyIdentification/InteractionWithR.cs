@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using SynchronizedVectorMeasurementProcessing;
+using System.Text;
+using System.Net;
+using System.Net.Sockets;
 
 namespace AsynchronyIdentification
 {
@@ -23,13 +26,12 @@ namespace AsynchronyIdentification
         /// 2 - режим, когда устойчивость нарушается после действия АПНУ.
         /// </summary>
         /// <param name="initialData">Список с входными данными</param>
-        /// <param name="fileName">Путь к приложению</param>
-        /// <param name="workingDirectory">Путь к скрипту</param>
-        /// <param name="argument">Имя скрипта</param>
         /// <returns>Результат вычисления</returns>
         public static string GetAnswer(
             List<ConfigurationRedonePmuData> initialData)
         {
+            GetClassifier();
+
             System.Diagnostics.Process process = 
                 new System.Diagnostics.Process();
             process.StartInfo.FileName = fileName;
@@ -57,6 +59,35 @@ namespace AsynchronyIdentification
             {
                 return errorMessage;
             }
+        }
+
+        private static void GetClassifier()
+        {
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("192.168.1.3"), 8005);
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            
+            socket.Connect(ipPoint);
+            string message = "classifier";
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            socket.Send(data);
+
+            // получаем ответ
+            data = new byte[256];
+            StringBuilder builder = new StringBuilder();
+            int bytes = 0;
+
+            do
+            {
+                bytes = socket.Receive(data, data.Length, 0);
+                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            }
+            while (socket.Available > 0);
+            //Console.WriteLine("ответ сервера: " + builder.ToString());
+
+            // закрываем сокет
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
         }
     }
 }

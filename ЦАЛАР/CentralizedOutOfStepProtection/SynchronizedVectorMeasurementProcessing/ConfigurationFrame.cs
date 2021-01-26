@@ -6,7 +6,7 @@ namespace SynchronizedVectorMeasurementProcessing
     /// <summary>
     /// Конфигурация кадра данных
     /// </summary>
-    [Serializable]
+    [Obsolete]
     public class ConfigurationFrame
     {
         /// <summary>

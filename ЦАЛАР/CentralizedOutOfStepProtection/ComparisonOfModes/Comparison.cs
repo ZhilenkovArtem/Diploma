@@ -12,8 +12,8 @@ namespace UsingOfPayload
         {
             var modeRatingList = new List<ModeRating>();
 
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
+            //Stopwatch stopwatch = new Stopwatch();
+            //stopwatch.Start();
             DirectoryInfo directory = new DirectoryInfo(path);
             foreach (var item in directory.GetFiles())
             {
@@ -63,11 +63,11 @@ namespace UsingOfPayload
                     mode = modeRating.name;
                 }
             }
-            stopwatch.Stop();
-            TimeSpan timespan = stopwatch.Elapsed;
-            string elapsedTime = String.Format(
-                "{0:0000}", timespan.Milliseconds);
-            Console.WriteLine(elapsedTime);
+            //stopwatch.Stop();
+            //TimeSpan timespan = stopwatch.Elapsed;
+            //string elapsedTime = String.Format(
+            //    "{0:0000}", timespan.Milliseconds);
+            //Console.WriteLine(elapsedTime);
 
             return mode;
         }

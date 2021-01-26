@@ -42,11 +42,11 @@ namespace C37Library
 
                 for (int j = 0; j < AssociateCurrentConfig.PMUStationList[i].PhasorNumber; j++)
                 {
-                    var magnitude = BitConverter.ToSingle(buffer, aux);
+                    var real = BitConverter.ToSingle(buffer, aux);
                     aux += 4;
-                    var phase = BitConverter.ToSingle(buffer, aux);
+                    var imaginary = BitConverter.ToSingle(buffer, aux);
                     aux += 4;
-                    AssociateCurrentConfig.PMUStationList[i].PhasorValues.Add(new Complex(magnitude, phase));
+                    AssociateCurrentConfig.PMUStationList[i].PhasorValues.Add(new Complex(real, imaginary));
                 }
 
                 AssociateCurrentConfig.PMUStationList[i].FREQ = BitConverter.ToSingle(buffer, aux);
@@ -100,8 +100,8 @@ namespace C37Library
 
                 foreach (var complex in pmu.PhasorValues)
                 {
-                    buffer = CompleteByteMas(buffer, 4, BitConverter.GetBytes((float)complex.Magnitude));
-                    buffer = CompleteByteMas(buffer, 4, BitConverter.GetBytes((float)complex.Phase));    
+                    buffer = CompleteByteMas(buffer, 4, BitConverter.GetBytes((float)complex.Real));
+                    buffer = CompleteByteMas(buffer, 4, BitConverter.GetBytes((float)complex.Imaginary));    
                 }
 
                 buffer = CompleteByteMas(buffer, 4, BitConverter.GetBytes(pmu.FREQ)); 

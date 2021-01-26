@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client60870", "Client60870\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C37Library", "C37Library\C37Library.csproj", "{10C025A3-D5E6-472D-8AEB-FCBA519B6165}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerOfComparison", "ServerOfComparison\ServerOfComparison.csproj", "{423434F2-6BBB-4C98-ABA1-30746B78CC7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +71,10 @@ Global
 		{10C025A3-D5E6-472D-8AEB-FCBA519B6165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10C025A3-D5E6-472D-8AEB-FCBA519B6165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10C025A3-D5E6-472D-8AEB-FCBA519B6165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{423434F2-6BBB-4C98-ABA1-30746B78CC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{423434F2-6BBB-4C98-ABA1-30746B78CC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{423434F2-6BBB-4C98-ABA1-30746B78CC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{423434F2-6BBB-4C98-ABA1-30746B78CC7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

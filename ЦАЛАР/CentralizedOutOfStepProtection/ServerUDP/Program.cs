@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.IO;
+//using System.Runtime.Serialization.Formatters.Binary;
+//using System.IO;
 using SynchronizedVectorMeasurementProcessing;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using AsynchronyIdentification;
 using ControlActionsSelection;
-using System.Net;
 using C37Library;
 
 namespace ServerUDP
@@ -54,10 +53,10 @@ namespace ServerUDP
             new ConfigurationRedonePmuData();
 
 
-        static HeaderFrame _header = new HeaderFrame("");
-        static ConfigFrame _config = new ConfigFrame();
-        static DataFrame _dataFrame = new DataFrame(_config);
-        static CMDFrame _cmdFrame = new CMDFrame();
+        static HeaderFrame _header;// = new HeaderFrame("");
+        static ConfigFrame _config;// = new ConfigFrame();
+        static DataFrame _dataFrame;// = new DataFrame(_config);
+        static CMDFrame _cmdFrame;// = new CMDFrame();
 
         /// <summary>
         /// Точка входа
@@ -86,13 +85,15 @@ namespace ServerUDP
                     {
                         case A_SYNC_HDR:
                             {
-                                //Console.WriteLine("Получен кадр A_SYNC_HDR");                                
+                                //Console.WriteLine("Получен кадр A_SYNC_HDR");
+                                _header = new HeaderFrame("");
                                 _header.Unpack(data);
                             };
                         break;
                         case A_SYNC_CFG2:
                             {
                                 //Console.WriteLine("Получен кадр A_SYNC_CFG2");
+                                _config = new ConfigFrame();
                                 _config.Unpack(data);                                
                             };
                         break;
@@ -101,8 +102,16 @@ namespace ServerUDP
                                 //Console.WriteLine("Получен кадр A_SYNC_DATA");
                                 _dataFrame = new DataFrame(_config);
                                 _dataFrame.Unpack(data);
+                                //Console.WriteLine($"В {_dataFrame.AssociateCurrentConfig.FRACSEC.ToString().Substring(6, 2)} " +
+                                //    $"мс получен кадр A_SYNC_DATA");
                                 var isFault = DetectDisturbance(
                                     _dataFrame.AssociateCurrentConfig);
+                                /*foreach (var pmu in _dataFrame.AssociateCurrentConfig.PMUStationList)
+                                {
+                                    Console.WriteLine($"{pmu.IDCODE}\t{pmu.PhasorValues[0].Magnitude}\t" +
+                                        $"{pmu.PhasorValues[0].Phase * 180 / Math.PI}\t{pmu.AnalogValues[0]}");
+                                }*/
+
                                 /*var strSOC = _dataFrame.AssociateCurrentConfig.SOC.ToString();
                                 var strFRACSEC = _dataFrame.AssociateCurrentConfig.FRACSEC.ToString();
                                 var time = new DateTime(
@@ -119,6 +128,7 @@ namespace ServerUDP
                         case A_SYNC_CMD:
                             {
                                 //Console.WriteLine("Получен кадр A_SYNC_CMD");
+                                _cmdFrame = new CMDFrame();
                                 _cmdFrame.Unpack(data);
                             }
                         break;
@@ -218,7 +228,12 @@ namespace ServerUDP
             {
                 var groups = FindingGroupsCoherentGenerators.
                     GetGroupsCoherentGenerators(devlist.DevList);
-                ControlActionsSelect(_dataForTIIS, groups);
+
+                if (_flag == true)
+                {
+                    ControlActionsSelect(_dataForTIIS, groups);
+                    _flag = false;
+                }
 
                 _configDeviations = new ConfigDeviationsInWithin60ms();
                 _dataForTIIS = new List<ConfigurationRedonePmuData>();
@@ -226,6 +241,7 @@ namespace ServerUDP
             return isFault;
         }
 
+        static bool _flag = true;
         /// <summary>
         /// Идентификация возникновения АР и выбор сечения ДС
         /// </summary>
@@ -247,25 +263,30 @@ namespace ServerUDP
 
             if (answer == "1 " || answer == "2 ")
             {
+                Console.WriteLine($"Результат классификации: {answer} (асинхронный режим возникнет)");
                 //Console.WriteLine($"Идентифицировано возникновение " +
                 //    $"асинхронного режима\nСечение деления системы:");
-                Stopwatch stopwatch = new Stopwatch();
-                stopwatch.Start();
+                /*Stopwatch stopwatch = new Stopwatch();
+                stopwatch.Start();*/
                 var slice = 
                     SliceSelection.SelectSlice(groups.Item1, groups.Item2);
-                stopwatch.Stop();
+                /*stopwatch.Stop();
                 TimeSpan timespan = stopwatch.Elapsed;
                 string elapsedTime =
-                    String.Format("{0:0000}", timespan.Milliseconds);
-                /*foreach (var lineSegment in slice)
+                    String.Format("{0:0000}", timespan.Milliseconds);*/
+                Console.WriteLine("Сечение деления системы:");
+                foreach (var lineSegment in slice)
                 {
                     Console.WriteLine($"{lineSegment.StartNode}-" +
                         $"{lineSegment.EndNode}");
-                }*/
+                }
                 //Console.WriteLine(elapsedTime + " ms");
             }
+            else
+            {
+                Console.WriteLine($"Результат классификации: {answer} (асинхронный режим не возникнет)");
+            }
 
-            Console.WriteLine($"Метод вернул {answer}");
             /*Console.WriteLine($"Время работы {elapsedTime} ms\n" +
                 $"Конец метода ControlActionsSelect");*/
         }
@@ -330,7 +351,7 @@ namespace ServerUDP
 
             for (int i = 0; i < currentFrame.PMUStationList.Count; i++)
             {
-                var pmu = currentFrame.PMUStationList[0];
+                var pmu = currentFrame.PMUStationList[i];
 
                 var idCodeOfCurrentFrame = pmu.IDCODE;
                 var angleOfCurrentFrame = 

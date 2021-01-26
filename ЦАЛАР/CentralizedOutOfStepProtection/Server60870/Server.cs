@@ -3,6 +3,9 @@ using lib60870;
 using UsingOfPayload;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Text;
+using System.Net;
+using System.Net.Sockets;
 
 namespace testserver
 {
@@ -168,10 +171,40 @@ namespace testserver
 
         private static async void DefineMode()
         {
-            Console.WriteLine("Начало метода DefineMode");
+            //Console.WriteLine("Начало метода DefineMode");
             var mode = await Task.Run(() => Comparison.GetMode(PATH, _telemetries));
             _telemetries = new List<Telemetry>();
-            Console.WriteLine($"Mode {mode}\nКонец метода DefineMode");
+            SendModeNumber(mode.Substring(7, 2));
+            //Console.WriteLine($"Mode {mode.Substring(7, 2)}\nКонец метода DefineMode");
+        }
+
+        private static void SendModeNumber(string modeNumber)
+        {
+            IPEndPoint ipPoint = new IPEndPoint(IPAddress.Parse("192.168.1.3"), 8005);
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            // подключаемся к удаленному хосту
+            socket.Connect(ipPoint);
+            string message = modeNumber;
+            byte[] data = Encoding.Unicode.GetBytes(message);
+            socket.Send(data);
+
+            /*/ получаем ответ
+            data = new byte[256]; // буфер для ответа
+            StringBuilder builder = new StringBuilder();
+            int bytes = 0; // количество полученных байт
+
+            do
+            {
+                bytes = socket.Receive(data, data.Length, 0);
+                builder.Append(Encoding.Unicode.GetString(data, 0, bytes));
+            }
+            while (socket.Available > 0);
+            Console.WriteLine("ответ сервера: " + builder.ToString());*/
+
+            // закрываем сокет
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
         }
     }
 }       

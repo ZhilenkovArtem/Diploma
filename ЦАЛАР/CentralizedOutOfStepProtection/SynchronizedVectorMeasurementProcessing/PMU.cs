@@ -6,7 +6,7 @@ namespace SynchronizedVectorMeasurementProcessing
     /// <summary>
     /// Данные устройства синхронизированных векторных измерений
     /// </summary>
-    [Serializable]
+    [Obsolete]
     public class PMU
     {
         /// <summary>
