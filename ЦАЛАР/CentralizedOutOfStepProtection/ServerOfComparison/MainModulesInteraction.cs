@@ -42,7 +42,7 @@ namespace ServerOfComparison
                 listenSocket.Bind(ipPoint);
                 listenSocket.Listen(100);
 
-                Console.WriteLine("Сервер запущен. Ожидание подключений...");
+                //Console.WriteLine("Сервер запущен. Ожидание подключений...");
 
                 while (true)
                 {
@@ -64,7 +64,7 @@ namespace ServerOfComparison
                     {
                         case AIREQUEST:
                             {
-                                Console.WriteLine("Получен запрос AIREQUEST");
+                                Console.WriteLine("Получен запрос AI_REQUEST от подсистемы Идентификации АР");
                                 string path = @"C:\Users\Артем Жиленков\Desktop\Магистрский IT\Diploma\ЦАЛАР\classifier.CSV";
                                 data = Encoding.Unicode.GetBytes(path);
                                 handler.Send(data);
@@ -72,7 +72,7 @@ namespace ServerOfComparison
                         break;
                         case CASREQUEST:
                             {
-                                Console.WriteLine("Получен запрос CASREQUEST");
+                                Console.WriteLine("Получен запрос CAS_REQUEST от подсистемы Выбора УВ");
                                 var sliceList = TestData.GetTestData();
                                 var binaryFormatter = new BinaryFormatter();
                                 var memoryStream = new MemoryStream();
@@ -84,7 +84,7 @@ namespace ServerOfComparison
                         default:
                             {
                                 _modeNumber = int.Parse(strBuilder);
-                                Console.WriteLine("_modeNumber обновлено");
+                                Console.WriteLine($"Значение номера режима _modeNumber обновлено. _modeNumber = {_modeNumber}");
                             }
                         break;
                     }

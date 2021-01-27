@@ -111,8 +111,7 @@ namespace ServerUDP
                                     Console.WriteLine($"{pmu.IDCODE}\t{pmu.PhasorValues[0].Magnitude}\t" +
                                         $"{pmu.PhasorValues[0].Phase * 180 / Math.PI}\t{pmu.AnalogValues[0]}");
                                 }*/
-
-                                /*var strSOC = _dataFrame.AssociateCurrentConfig.SOC.ToString();
+                                var strSOC = _dataFrame.AssociateCurrentConfig.SOC.ToString();
                                 var strFRACSEC = _dataFrame.AssociateCurrentConfig.FRACSEC.ToString();
                                 var time = new DateTime(
                                     int.Parse(strSOC.Substring(4, 4)),
@@ -122,7 +121,8 @@ namespace ServerUDP
                                     int.Parse(strFRACSEC.Substring(2, 2)),
                                     int.Parse(strFRACSEC.Substring(4, 2)),
                                     int.Parse(strFRACSEC.Substring(6, 2) + "0"));
-                                Console.WriteLine($"{time}.{time.Millisecond}");*/
+                                Console.WriteLine($"В {time.Hour}:{time.Minute}:{time.ToString("ss")}.{time.ToString("fff")} получен кадр\t" +
+                                    $"Выявлено возмущение: {isFault}");
                             }
                         break;
                         case A_SYNC_CMD:
@@ -228,6 +228,10 @@ namespace ServerUDP
             {
                 var groups = FindingGroupsCoherentGenerators.
                     GetGroupsCoherentGenerators(devlist.DevList);
+                Console.WriteLine("Первая группа генераторов:");
+                Console.WriteLine(string.Join(" ", groups.Item1));
+                Console.WriteLine("Вторая группа генераторов:");
+                Console.WriteLine(string.Join(" ", groups.Item2));
 
                 if (_flag == true)
                 {
