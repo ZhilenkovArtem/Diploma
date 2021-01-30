@@ -10,6 +10,8 @@ namespace UsingOfPayload
     {
         public static string GetMode(string path, List<Telemetry> telemetries)
         {
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
             var modeRatingList = new List<ModeRating>();
 
             //Stopwatch stopwatch = new Stopwatch();
@@ -68,7 +70,11 @@ namespace UsingOfPayload
             //string elapsedTime = String.Format(
             //    "{0:0000}", timespan.Milliseconds);
             //Console.WriteLine(elapsedTime);
-
+            stopwatch.Stop();
+            TimeSpan timespan = stopwatch.Elapsed;
+            string elapsedTime =
+                String.Format("{0:0000}", timespan.Milliseconds);
+            Console.WriteLine(elapsedTime + "ms");
             return mode;
         }
 

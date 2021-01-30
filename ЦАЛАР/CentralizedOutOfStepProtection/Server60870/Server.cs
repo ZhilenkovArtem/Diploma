@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Net;
 using System.Net.Sockets;
+using System.Diagnostics;
 
 namespace testserver
 {
@@ -171,11 +172,11 @@ namespace testserver
 
         private static async void DefineMode()
         {
-            //Console.WriteLine("Начало метода DefineMode");
+            Console.WriteLine("Начало метода DefineMode");
             var mode = await Task.Run(() => Comparison.GetMode(PATH, _telemetries));
             _telemetries = new List<Telemetry>();
             SendModeNumber(mode.Substring(7, 2));
-            //Console.WriteLine($"Mode {mode.Substring(7, 2)}\nКонец метода DefineMode");
+            Console.WriteLine($"Mode {mode.Substring(7, 2)}\nКонец метода DefineMode");
         }
 
         private static void SendModeNumber(string modeNumber)

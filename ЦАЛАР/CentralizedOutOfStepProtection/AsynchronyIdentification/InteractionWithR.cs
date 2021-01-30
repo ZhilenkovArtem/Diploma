@@ -30,7 +30,7 @@ namespace AsynchronyIdentification
         public static string GetAnswer(
             List<ConfigurationRedonePmuData> initialData)
         {
-            GetClassifier();
+            //GetClassifier();
 
             System.Diagnostics.Process process = 
                 new System.Diagnostics.Process();

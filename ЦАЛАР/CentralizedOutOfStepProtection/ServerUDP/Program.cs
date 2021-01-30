@@ -121,8 +121,8 @@ namespace ServerUDP
                                     int.Parse(strFRACSEC.Substring(2, 2)),
                                     int.Parse(strFRACSEC.Substring(4, 2)),
                                     int.Parse(strFRACSEC.Substring(6, 2) + "0"));
-                                Console.WriteLine($"В {time.Hour}:{time.Minute}:{time.ToString("ss")}.{time.ToString("fff")} получен кадр\t" +
-                                    $"Выявлено возмущение: {isFault}");
+                                //Console.WriteLine($"В {time.Hour}:{time.Minute}:{time.ToString("ss")}.{time.ToString("fff")} получен кадр\t" +
+                                //    $"Выявлено возмущение: {isFault}");
                             }
                         break;
                         case A_SYNC_CMD:
@@ -220,18 +220,19 @@ namespace ServerUDP
             var devlist = new DeviationsList(listWithoutNodes);
             _configDeviations = 
                 _configDeviations.AddNewDevList(_configDeviations, devlist);
-            var isFault = DetectionOfFault.DetectFault(devlist.DevList);
-            
+
+            var isFault = DetectionOfFault.DetectFault(devlist.DevList);            
+
             var countDev = _configDeviations.DeviationsInWithin60ms.Count;
             if (isFault && countDev ==
                 ConfigDeviationsInWithin60ms.DEVIATIONSLISTSCOUNT)
             {
                 var groups = FindingGroupsCoherentGenerators.
                     GetGroupsCoherentGenerators(devlist.DevList);
-                Console.WriteLine("Первая группа генераторов:");
+                /*Console.WriteLine("Первая группа генераторов:");
                 Console.WriteLine(string.Join(" ", groups.Item1));
                 Console.WriteLine("Вторая группа генераторов:");
-                Console.WriteLine(string.Join(" ", groups.Item2));
+                Console.WriteLine(string.Join(" ", groups.Item2));*/
 
                 if (_flag == true)
                 {
@@ -242,6 +243,7 @@ namespace ServerUDP
                 _configDeviations = new ConfigDeviationsInWithin60ms();
                 _dataForTIIS = new List<ConfigurationRedonePmuData>();
             }
+
             return isFault;
         }
 
@@ -267,7 +269,7 @@ namespace ServerUDP
 
             if (answer == "1 " || answer == "2 ")
             {
-                Console.WriteLine($"Результат классификации: {answer} (асинхронный режим возникнет)");
+                //Console.WriteLine($"Результат классификации: {answer} (асинхронный режим возникнет)");
                 //Console.WriteLine($"Идентифицировано возникновение " +
                 //    $"асинхронного режима\nСечение деления системы:");
                 /*Stopwatch stopwatch = new Stopwatch();
@@ -277,18 +279,18 @@ namespace ServerUDP
                 /*stopwatch.Stop();
                 TimeSpan timespan = stopwatch.Elapsed;
                 string elapsedTime =
-                    String.Format("{0:0000}", timespan.Milliseconds);*/
-                Console.WriteLine("Сечение деления системы:");
+                    String.Format("{0:0000}", timespan.Milliseconds);
+                Console.WriteLine(elapsedTime + " ms");*/
+                /*Console.WriteLine("Сечение деления системы:");
                 foreach (var lineSegment in slice)
                 {
                     Console.WriteLine($"{lineSegment.StartNode}-" +
                         $"{lineSegment.EndNode}");
-                }
-                //Console.WriteLine(elapsedTime + " ms");
+                }*/
             }
             else
             {
-                Console.WriteLine($"Результат классификации: {answer} (асинхронный режим не возникнет)");
+                //Console.WriteLine($"Результат классификации: {answer} (асинхронный режим не возникнет)");
             }
 
             /*Console.WriteLine($"Время работы {elapsedTime} ms\n" +

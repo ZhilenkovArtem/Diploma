@@ -117,7 +117,7 @@ namespace ClientUDP
                 var config = new ConfigFrame();
 
                 config.SOC = uint.Parse($"{dt.ToString("dd")}{dt.ToString("MM")}{dt.ToString("yyyy")}");
-                config.FRACSEC = uint.Parse($"{dt.ToString("HH")}{dt.ToString("mm")}{dt.ToString("ss")}{dt.ToString("ff")}");
+                config.FRACSEC = uint.Parse($"{/*dt.ToString("HH")*/10}{dt.ToString("mm")}{dt.ToString("ss")}{dt.ToString("ff")}");
                 dt = dt.AddMilliseconds(20);
 
                 var listPMU = config.PMUStationList;
